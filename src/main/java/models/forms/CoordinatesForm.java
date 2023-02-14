@@ -32,7 +32,7 @@ public class CoordinatesForm extends Form<Coordinates>{
             } catch (NumberFormatException exception) {
                 console.printError("X должно быть числом типа float");
             } finally {
-                console.printError("Непридвиденная ошибка!");
+                console.printError("Непредвиденная ошибка!");
             }
         }
     }
@@ -43,9 +43,9 @@ public class CoordinatesForm extends Form<Coordinates>{
             try {
                 return Double.parseDouble(input);
             } catch (NumberFormatException exception) {
-                console.printError("Y должно быть числом типа float");
+                console.printError("Y должно быть числом типа double");
             } finally {
-                console.printError("Непридвиденная ошибка!");
+                console.printError("Непредвиденная ошибка!");
             }
         }
     }

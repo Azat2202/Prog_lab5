@@ -1,6 +1,9 @@
 package models.forms;
 
 import managers.commandLine.*;
+import models.Color;
+import models.Country;
+import models.Location;
 import models.Person;
 
 import java.util.Scanner;
@@ -45,5 +48,31 @@ public class PersonForm extends Form<Person>{
         }
     }
 
-    private
+    private int askWeight(){
+        String input = scanner.nextLine().trim();
+        while (true) {
+            console.print(ConsoleColors.toColor("Введите количество студентов", ConsoleColors.GREEN));
+            try {
+                return Integer.parseInt(input);
+            } catch (NumberFormatException exception) {
+                console.printError("Число студентов должно быть числом типа long");
+            } finally {
+                console.printError("Непридвиденная ошибка!");
+            }
+        }
+    }
+
+    private Color askEyeColor(){
+        return new ColorForm(console, "глаз").build();
+    }
+    private Color askHairColor(){
+        return new ColorForm(console, "волсо").build();
+    }
+
+    private Country askNationality(){
+        return new NationalityForm(console).build();
+    }
+    private Location askLocation(){
+        return new LocationForm(console).build();
+    }
 }

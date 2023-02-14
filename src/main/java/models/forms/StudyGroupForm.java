@@ -9,6 +9,7 @@ import models.StudyGroup;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Scanner;
 
 public class StudyGroupForm extends Form<StudyGroup>{
@@ -23,10 +24,10 @@ public class StudyGroupForm extends Form<StudyGroup>{
 
     @Override
     public StudyGroup build() {
-        return StudyGroup(
+        return new StudyGroup(
                 askName(),
                 askCoordinates(),
-                LocalDate.now(),
+                new Date(),
                 askStudentsCount(),
                 askExpelledStudents(),
                 askAverageMark(),
@@ -100,6 +101,6 @@ public class StudyGroupForm extends Form<StudyGroup>{
     }
 
     private Person askGroupAdmin(){
-
+        return new PersonForm(console).build();
     }
 }
