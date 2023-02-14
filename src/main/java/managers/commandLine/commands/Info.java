@@ -2,7 +2,6 @@ package managers.commandLine.commands;
 
 import managers.CollectionManager;
 import managers.commandLine.*;
-import models.Color;
 
 public class Info extends Command{
     private CollectionManager collectionManager;

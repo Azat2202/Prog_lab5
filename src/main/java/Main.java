@@ -15,7 +15,8 @@ public class Main {
 
         commandManager.addCommand(List.of(
                 new Help(console, commandManager),
-                new Info(console, collectionManager)
+                new Info(console, collectionManager),
+                new Show(console, collectionManager)
         ));
         new RuntimeManager(console, commandManager).interactiveMode();
 
