@@ -2,7 +2,7 @@ package managers.commandLine;
 
 import java.util.Objects;
 
-public abstract class Command {
+public abstract class Command implements Executable{
     private final String name;
     private final String description;
 
