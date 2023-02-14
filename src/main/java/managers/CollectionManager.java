@@ -53,8 +53,7 @@ public class CollectionManager {
      * @return Последний элемент коллекции (null если коллекция пустая).
      */
     public StudyGroup getLast() {
-        if (collection.isEmpty()) return null;
-        return Iterables.getLast(collection);
+        return collection.getLast();
     }
 
     /**
@@ -79,7 +78,6 @@ public class CollectionManager {
 
     public void addElement(StudyGroup studyGroup){
         collection.add(studyGroup);
-        StudyGroup.incNextId();
     }
     public void removeElement(StudyGroup studyGroup){
         collection.remove(studyGroup);

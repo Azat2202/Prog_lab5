@@ -29,7 +29,7 @@ public class StudyGroup implements Validator{
         this.groupAdmin = groupAdmin;
     }
 
-    public static int incNextId(){
+    private static int incNextId(){
         return nextId++;
     }
 
