@@ -1,13 +1,16 @@
 package managers.commandLine;
 
-import managers.commandLine.Printable;
+import models.Color;
 
 /**
  * Класс для вывода в консоль
  */
 public class Console implements Printable {
-    public static final String ANSI_ERROR_COLOR = "\u001B[31m";
-    public static final String ANSI_RESET = "\u001B[0m";
+
+    public static String toColor(String s, ConsoleColors color){
+        return color.toString() + s + ConsoleColors.RESET;
+    }
+
     @Override
     public void println(String a) {
         System.out.println(a);
@@ -20,6 +23,6 @@ public class Console implements Printable {
 
     @Override
     public void printError(String a) {
-        System.out.println(ANSI_ERROR_COLOR + a + ANSI_RESET);
+        System.out.println(ConsoleColors.RED + a + ConsoleColors.RESET);
     }
 }

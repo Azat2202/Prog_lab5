@@ -13,8 +13,12 @@ public class Main {
         CollectionManager collectionManager = new CollectionManager(fileWorker);
         CommandManager commandManager = new CommandManager();
 
-        commandManager.addCommand(List.of(new Help(console, commandManager)));
-
+        commandManager.addCommand(List.of(
+                new Help(console, commandManager),
+                new Info(console, collectionManager)
+        ));
         new RuntimeManager(console, commandManager).interactiveMode();
+
+
     }
 }

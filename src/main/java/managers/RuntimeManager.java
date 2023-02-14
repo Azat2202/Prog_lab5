@@ -19,14 +19,12 @@ public class RuntimeManager {
         Scanner userScanner = ScannerManager.getUserScanner();
         try{
             ExitCode commandStatus;
-            String[] userCommand = {"", ""};
+            String userCommand = "";
             do{
-                userCommand = userScanner.nextLine()
-                        .trim()
-                        .split(" ", 2);
-                userCommand[1] = userCommand[1].trim();
-                commandManager.addToHistory(userCommand[0] + userCommand[1]);
-                commandStatus = this.launch(userCommand);
+                userCommand = userScanner.nextLine().trim();
+                commandManager.addToHistory(userCommand);
+                commandStatus = this.launch(userCommand
+                        .split(" ", 2));
             }
             while (commandStatus != ExitCode.EXIT);
         } catch (NoSuchElementException exception) {
@@ -42,7 +40,7 @@ public class RuntimeManager {
                 .stream().filter(s -> s.getName().equals(userCommand[0]))
                 .findFirst().orElse(null);
         if (command == null) {
-            console.printError("Команда '" + userCommand[0] + "' не найдена. Наберите 'help' для справки");
+            console.printError("Команда '" + userCommand[0] + "' не найдена. Напишите 'help' для справки");
             return ExitCode.ERROR;
         }
 
