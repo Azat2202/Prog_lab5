@@ -1,6 +1,8 @@
 package models;
 
+import java.util.ArrayDeque;
 import java.util.Date;
+import java.util.Objects;
 
 public class StudyGroup implements Validator{
     private Integer id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
@@ -13,8 +15,10 @@ public class StudyGroup implements Validator{
     private FormOfEducation formOfEducation; //Поле может быть null
     private Person groupAdmin; //Поле не может быть null
 
-    public StudyGroup(Integer id, String name, Coordinates coordinates, Date creationDate, Long studentsCount, long expelledStudents, long averageMark, FormOfEducation formOfEducation, Person groupAdmin) {
-        this.id = id;
+    private static int nextId = 0;
+
+    public StudyGroup(String name, Coordinates coordinates, Date creationDate, Long studentsCount, long expelledStudents, long averageMark, FormOfEducation formOfEducation, Person groupAdmin) {
+        this.id = incNextId();
         this.name = name;
         this.coordinates = coordinates;
         this.creationDate = creationDate;
@@ -25,7 +29,17 @@ public class StudyGroup implements Validator{
         this.groupAdmin = groupAdmin;
     }
 
+    public static int incNextId(){
+        return nextId++;
+    }
 
+    public static void updateId(ArrayDeque<StudyGroup> collection){
+        nextId = collection.
+                stream().filter(Objects::nonNull)
+                .map(StudyGroup::getId)
+                .mapToInt(Integer::intValue)
+                .max().orElse(0) + 1;
+    }
 
     public Integer getId() {
         return id;
