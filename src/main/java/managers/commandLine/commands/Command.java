@@ -1,8 +1,10 @@
-package managers.commandLine;
+package managers.commandLine.commands;
+
+import managers.commandLine.Executable;
 
 import java.util.Objects;
 
-public abstract class Command implements Executable{
+public abstract class Command implements Executable {
     private final String name;
     private final String description;
 

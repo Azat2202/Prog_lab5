@@ -1,5 +1,7 @@
 package managers.commandLine;
 
+import managers.commandLine.commands.Command;
+
 import java.util.*;
 
 public class CommandManager {

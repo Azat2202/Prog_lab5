@@ -1,8 +1,7 @@
 package managers;
 
-import managers.*;
 import managers.commandLine.*;
-import models.*;
+import managers.commandLine.commands.Command;
 
 import java.util.*;
 
@@ -47,6 +46,6 @@ public class RuntimeManager {
             return ExitCode.ERROR;
         }
 
-        return command.execute();
+        return command.execute(userCommand);
     }
 }
