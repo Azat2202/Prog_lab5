@@ -25,7 +25,7 @@ public class NationalityForm extends Form<Country>{
                 return Country.valueOf(input.toUpperCase(Locale.ROOT));
             } catch (IllegalArgumentException exception){
                 console.printError("Такой страны нет в списке");
-            } finally {
+            } catch (Throwable throwable) {
                 console.printError("Непредвиденная ошибка");
             }
         }

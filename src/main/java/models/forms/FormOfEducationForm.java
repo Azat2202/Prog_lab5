@@ -25,7 +25,7 @@ public class FormOfEducationForm extends Form<FormOfEducation>{
                 return FormOfEducation.valueOf(input.toUpperCase(Locale.ROOT));
             } catch (IllegalArgumentException exception){
                 console.printError("Такой формы обучения нет в списке");
-            } finally {
+            } catch (Throwable throwable) {
                 console.printError("Непредвиденная ошибка");
             }
         }

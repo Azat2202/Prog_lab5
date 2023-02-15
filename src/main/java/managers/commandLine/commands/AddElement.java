@@ -27,7 +27,7 @@ public class AddElement extends Command{
                 return ExitCode.OK;
             } catch (InvalidForm invalidForm) {
                 console.printError("Поля продукта не валидны! Продукт не создан!");
-            } finally {
+            } catch (Throwable throwable){
                 console.printError("Непредвиденная ошибка");
             }
         }

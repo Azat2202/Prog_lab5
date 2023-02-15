@@ -49,14 +49,15 @@ public class PersonForm extends Form<Person>{
     }
 
     private int askWeight(){
-        String input = scanner.nextLine().trim();
+
         while (true) {
             console.print(ConsoleColors.toColor("Введите количество студентов", ConsoleColors.GREEN));
+            String input = scanner.nextLine().trim();
             try {
                 return Integer.parseInt(input);
             } catch (NumberFormatException exception) {
                 console.printError("Число студентов должно быть числом типа long");
-            } finally {
+            } catch (Throwable throwable) {
                 console.printError("Непридвиденная ошибка!");
             }
         }

@@ -55,42 +55,43 @@ public class StudyGroupForm extends Form<StudyGroup>{
     }
 
     private Long askStudentsCount(){
-        String input = scanner.nextLine().trim();
+
         while (true) {
             console.print(ConsoleColors.toColor("Введите количество студентов", ConsoleColors.GREEN));
+            String input = scanner.nextLine().trim();
             try {
                 return Long.parseLong(input);
             } catch (NumberFormatException exception) {
                 console.printError("Число студентов должно быть числом типа long");
-            } finally {
+            } catch (Throwable throwable) {
                 console.printError("Непридвиденная ошибка!");
             }
         }
     }
 
     private long askExpelledStudents(){
-        String input = scanner.nextLine().trim();
         while (true) {
             console.print(ConsoleColors.toColor("Введите количество отчисленных студентов", ConsoleColors.GREEN));
+            String input = scanner.nextLine().trim();
             try {
                 return Long.parseLong(input);
             } catch (NumberFormatException exception) {
                 console.printError("Число студентов должно быть числом типа long");
-            } finally {
+            } catch (Throwable throwable) {
                 console.printError("Непридвиденная ошибка!");
             }
         }
     }
 
     private long askAverageMark(){
-        String input = scanner.nextLine().trim();
         while (true) {
             console.print(ConsoleColors.toColor("Введите среднюю оценку", ConsoleColors.GREEN));
+            String input = scanner.nextLine().trim();
             try {
                 return Long.parseLong(input);
             } catch (NumberFormatException exception) {
                 console.printError("Оценка должна быть числом типа long");
-            } finally {
+            } catch (Throwable throwable) {
                 console.printError("Непридвиденная ошибка!");
             }
         }

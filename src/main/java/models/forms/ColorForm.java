@@ -28,7 +28,7 @@ public class ColorForm extends Form<Color>{
                 return Color.valueOf(input.toUpperCase(Locale.ROOT));
             } catch (IllegalArgumentException exception){
                 console.printError("Такого цвета нет в списке");
-            } finally {
+            } catch (Throwable throwable) {
                 console.printError("Непредвиденная ошибка");
             }
         }
