@@ -26,7 +26,7 @@ public class AddElement extends Command{
                 console.println(ConsoleColors.toColor("Создание объекта StudyGroup окончено успешно!", ConsoleColors.PURPLE));
                 return ExitCode.OK;
             } catch (InvalidForm invalidForm) {
-                console.printError("Поля продукта не валидны! Продукт не создан!");
+                console.printError("Поля объекта не валидны! Объект не создан!");
             } catch (Throwable throwable){
                 console.printError("Непредвиденная ошибка");
             }

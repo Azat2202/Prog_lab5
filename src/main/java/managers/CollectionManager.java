@@ -4,6 +4,7 @@ import models.StudyGroup;
 
 import java.time.LocalDateTime;
 import java.util.ArrayDeque;
+import java.util.Collection;
 
 public class CollectionManager {
     private final ArrayDeque<StudyGroup> collection = new ArrayDeque<>();
@@ -49,6 +50,10 @@ public class CollectionManager {
         return collection.peek();
     }
 
+    public void clear(){
+        this.collection.clear();
+        lastInitTime = LocalDateTime.now();
+    }
     /**
      * @return Последний элемент коллекции (null если коллекция пустая).
      */
@@ -67,6 +72,14 @@ public class CollectionManager {
         return null;
     }
 
+    public void editById(int id, StudyGroup newElement, ArrayDeque<StudyGroup> collection){
+        StudyGroup pastElement = this.getById(id);
+        this.removeElement(pastElement);
+        newElement.setId(id);
+        this.addElement(newElement);
+        StudyGroup.updateId(collection);
+    }
+
     /**
      * @param id ID элемента.
      * @return Проверяет, существует ли элемент с таким ID.
@@ -80,6 +93,7 @@ public class CollectionManager {
         this.lastSaveTime = LocalDateTime.now();
         collection.add(studyGroup);
     }
+
     public void removeElement(StudyGroup studyGroup){
         collection.remove(studyGroup);
     }
