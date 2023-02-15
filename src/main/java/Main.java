@@ -15,6 +15,7 @@ public class Main {
         CollectionManager collectionManager = new CollectionManager(fileWorker);
         CommandManager commandManager = new CommandManager();
         if (fileWorker.findfile() == ExitCode.ERROR) return;
+        if (fileWorker.createObjects() == ExitCode.ERROR) return;
 
         commandManager.addCommand(List.of(
                 new Help(console, commandManager),

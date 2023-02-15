@@ -1,11 +1,13 @@
 package models;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 import managers.commandLine.ConsoleColors;
 
 import java.util.ArrayDeque;
 import java.util.Date;
 import java.util.Objects;
 
+@XStreamAlias("StudyGroup")
 public class StudyGroup implements Validator{
     private Integer id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой

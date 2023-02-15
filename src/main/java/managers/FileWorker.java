@@ -1,14 +1,27 @@
 package managers;
 
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.annotations.XStreamImplicit;
+import com.thoughtworks.xstream.io.xml.StaxDriver;
+import com.thoughtworks.xstream.security.*;
 import managers.commandLine.Console;
 import managers.commandLine.ConsoleColors;
 import managers.commandLine.ExitCode;
+import models.*;
 
 import java.io.*;
+import java.time.LocalDateTime;
+import java.util.ArrayDeque;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 
 public class FileWorker {
     private String text;
     private Console console;
+
+    @XStreamImplicit
+    private ArrayDeque<StudyGroup> collection = new ArrayDeque<StudyGroup>();
 
     public FileWorker(Console console) {
         this.console = console;
@@ -55,5 +68,79 @@ public class FileWorker {
         }
         this.text = stringBuilder.toString();
         return ExitCode.OK;
+    }
+
+    public ExitCode createObjects(){
+        //XStream xstream = new XStream();
+//        xstream.processAnnotations();
+//        xstream.addPermission(AnyTypePermission.ANY);
+//        xstream.addImplicitCollection(this.getClass(), "collection");
+//        this.collection = (ArrayDeque<StudyGroup>) xstream.fromXML(this.text);
+//        for (StudyGroup studyGroup : collection){
+//            console.println(studyGroup.toString());
+//        }
+//        console.println(convertedCustomer.toString());
+        collection.add(new StudyGroup(
+                "Azat",
+                new Coordinates((float) 10.1, (Double) 10.5),
+                convertToDateViaSqlTimestamp(LocalDateTime.now()),
+                10L,
+                6,
+                4L,
+                FormOfEducation.FULL_TIME_EDUCATION,
+                new Person(
+                        "admin",
+                        55,
+                        Color.WHITE,
+                        Color.BROWN,
+                        Country.FRANCE,
+                        new Location(15, 10, "Home")
+                )
+        ));
+        collection.add(new StudyGroup(
+                "Azat2",
+                new Coordinates((float) 10.2, (Double) 10.5),
+                convertToDateViaSqlTimestamp(LocalDateTime.now()),
+                15L,
+                6,
+                4L,
+                FormOfEducation.EVENING_CLASSES,
+                new Person(
+                        "admin",
+                        55,
+                        Color.BROWN,
+                        Color.RED,
+                        Country.FRANCE,
+                        new Location(15, 10, "Home3")
+                )
+        ));
+        collection.add(new StudyGroup(
+                "Azat3",
+                new Coordinates((float) 15.5, (Double) 10.5),
+                convertToDateViaSqlTimestamp(LocalDateTime.now()),
+                10L,
+                6,
+                4L,
+                FormOfEducation.EVENING_CLASSES,
+                new Person(
+                        "admin",
+                        55,
+                        Color.RED,
+                        Color.BROWN,
+                        Country.FRANCE,
+                        new Location(15, 10, "Home2")
+                )
+        ));
+        XStream xstream = new XStream();
+//        xstream.alias("StudyGroup", StudyGroup.class);
+//        xstream.alias("Groups", FileWorker.class);
+        xstream.addImplicitCollection(FileWorker.class, "collection");
+
+         String xml = xstream.toXML(this);
+         console.println(xml);
+        return ExitCode.OK;
+    }
+    private Date convertToDateViaSqlTimestamp(LocalDateTime dateToConvert) {
+        return java.sql.Timestamp.valueOf(dateToConvert);
     }
 }
