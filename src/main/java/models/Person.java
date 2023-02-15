@@ -1,5 +1,7 @@
 package models;
 
+import managers.commandLine.ConsoleColors;
+
 import java.util.Objects;
 
 public class Person implements Validator{
@@ -101,13 +103,13 @@ public class Person implements Validator{
 
     @Override
     public String toString() {
-        return "Person{" +
-                "name='" + name + '\'' +
-                ", weight=" + weight +
-                ", eyeColor=" + eyeColor +
-                ", hairColor=" + hairColor +
-                ", nationality=" + nationality +
-                ", location=" + location +
+        return "Person{" + "\n" +
+                ConsoleColors.toColor("name=", ConsoleColors.CYAN) + name  + "\n" +
+                ConsoleColors.toColor("weight=", ConsoleColors.CYAN) + weight + "\n" +
+                ConsoleColors.toColor("eyeColor=", ConsoleColors.CYAN) + eyeColor + "\n" +
+                ConsoleColors.toColor("hairColor=", ConsoleColors.CYAN) + hairColor + "\n" +
+                ConsoleColors.toColor("nationality=", ConsoleColors.CYAN) + nationality + "\n" +
+                ConsoleColors.toColor("location=", ConsoleColors.CYAN) + location + "\n" +
                 '}';
     }
 }

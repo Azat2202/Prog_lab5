@@ -17,7 +17,7 @@ public class NationalityForm extends Form<Country>{
     @Override
     public Country build() {
         console.println("Возможные страны: ");
-        console.print(Country.names());
+        console.println(Country.names());
         while (true){
             console.println(Console.toColor("Введите страну: ", ConsoleColors.GREEN));
             String input = scanner.nextLine().trim();

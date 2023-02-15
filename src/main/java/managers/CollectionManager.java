@@ -12,7 +12,7 @@ public class CollectionManager {
     private final FileWorker fileWorker;
 
     public CollectionManager(FileWorker fileWorker) {
-        this.lastInitTime = null;
+        this.lastInitTime = LocalDateTime.now();
         this.lastSaveTime = null;
         this.fileWorker = fileWorker;
     }
@@ -77,6 +77,7 @@ public class CollectionManager {
     }
 
     public void addElement(StudyGroup studyGroup){
+        this.lastSaveTime = LocalDateTime.now();
         collection.add(studyGroup);
     }
     public void removeElement(StudyGroup studyGroup){

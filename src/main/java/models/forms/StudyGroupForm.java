@@ -57,7 +57,7 @@ public class StudyGroupForm extends Form<StudyGroup>{
     private Long askStudentsCount(){
 
         while (true) {
-            console.print(ConsoleColors.toColor("Введите количество студентов", ConsoleColors.GREEN));
+            console.println(ConsoleColors.toColor("Введите количество студентов", ConsoleColors.GREEN));
             String input = scanner.nextLine().trim();
             try {
                 return Long.parseLong(input);
@@ -71,7 +71,7 @@ public class StudyGroupForm extends Form<StudyGroup>{
 
     private long askExpelledStudents(){
         while (true) {
-            console.print(ConsoleColors.toColor("Введите количество отчисленных студентов", ConsoleColors.GREEN));
+            console.println(ConsoleColors.toColor("Введите количество отчисленных студентов", ConsoleColors.GREEN));
             String input = scanner.nextLine().trim();
             try {
                 return Long.parseLong(input);
@@ -85,7 +85,7 @@ public class StudyGroupForm extends Form<StudyGroup>{
 
     private long askAverageMark(){
         while (true) {
-            console.print(ConsoleColors.toColor("Введите среднюю оценку", ConsoleColors.GREEN));
+            console.println(ConsoleColors.toColor("Введите среднюю оценку", ConsoleColors.GREEN));
             String input = scanner.nextLine().trim();
             try {
                 return Long.parseLong(input);

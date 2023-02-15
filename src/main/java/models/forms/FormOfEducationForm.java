@@ -17,7 +17,7 @@ public class FormOfEducationForm extends Form<FormOfEducation>{
     @Override
     public FormOfEducation build() {
         console.println("Возможные формы обучения: ");
-        console.print(FormOfEducation.names());
+        console.println(FormOfEducation.names());
         while (true){
             console.println(Console.toColor("Введите форму обучения: ", ConsoleColors.GREEN));
             String input = scanner.nextLine().trim();

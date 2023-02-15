@@ -20,7 +20,5 @@ public class Main {
                 new AddElement(console, collectionManager)
         ));
         new RuntimeManager(console, commandManager).interactiveMode();
-
-
     }
 }

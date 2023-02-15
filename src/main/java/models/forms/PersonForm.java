@@ -19,6 +19,7 @@ public class PersonForm extends Form<Person>{
 
     @Override
     public Person build() {
+        console.println(ConsoleColors.toColor("Создание объекта админа", ConsoleColors.PURPLE));
         Person person = new Person(
                 askName(),
                 askWeight(),
@@ -31,6 +32,8 @@ public class PersonForm extends Form<Person>{
             console.printError("Невалидные координаты попробуйте снова");
             throw new InvalidForm();
         };
+
+        console.println(ConsoleColors.toColor("Создание объекта админа окончено успешно", ConsoleColors.PURPLE));
         return person;
     }
 
@@ -49,9 +52,8 @@ public class PersonForm extends Form<Person>{
     }
 
     private int askWeight(){
-
         while (true) {
-            console.print(ConsoleColors.toColor("Введите количество студентов", ConsoleColors.GREEN));
+            console.println(ConsoleColors.toColor("Введите количество студентов", ConsoleColors.GREEN));
             String input = scanner.nextLine().trim();
             try {
                 return Integer.parseInt(input);

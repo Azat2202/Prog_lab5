@@ -20,7 +20,7 @@ public class ColorForm extends Form<Color>{
     @Override
     public Color build() {
         console.println("Возможные цвета: ");
-        console.print(Color.names());
+        console.println(Color.names());
         while (true){
             console.println(Console.toColor("Введите цвет " + type + ": ", ConsoleColors.GREEN));
             String input = scanner.nextLine().trim();

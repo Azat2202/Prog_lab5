@@ -24,7 +24,7 @@ public class CoordinatesForm extends Form<Coordinates>{
 
     private Float askX(){
         while (true) {
-            console.print(ConsoleColors.toColor("Введите координату X", ConsoleColors.GREEN));
+            console.println(ConsoleColors.toColor("Введите координату X", ConsoleColors.GREEN));
             String input = scanner.nextLine().trim();
             try {
                 return Float.parseFloat(input);
@@ -37,7 +37,7 @@ public class CoordinatesForm extends Form<Coordinates>{
     }
     private Double askY(){
         while (true) {
-            console.print(ConsoleColors.toColor("Введите координату Y", ConsoleColors.GREEN));
+            console.println(ConsoleColors.toColor("Введите координату Y", ConsoleColors.GREEN));
             String input = scanner.nextLine().trim();
             try {
                 return Double.parseDouble(input);

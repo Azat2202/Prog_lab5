@@ -1,5 +1,7 @@
 package models;
 
+import managers.commandLine.ConsoleColors;
+
 import java.util.ArrayDeque;
 import java.util.Date;
 import java.util.Objects;
@@ -159,16 +161,16 @@ public class StudyGroup implements Validator{
 
     @Override
     public String toString() {
-        return "StudyGroup{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", coordinates=" + coordinates +
-                ", creationDate=" + creationDate +
-                ", studentsCount=" + studentsCount +
-                ", expelledStudents=" + expelledStudents +
-                ", averageMark=" + averageMark +
-                ", formOfEducation=" + formOfEducation +
-                ", groupAdmin=" + groupAdmin +
+        return "StudyGroup{" + '\n' +
+                ConsoleColors.toColor("id = ", ConsoleColors.CYAN) + id + '\n' +
+                ConsoleColors.toColor("name = ", ConsoleColors.CYAN) + name + '\n' +
+                ConsoleColors.toColor("coordinates = ", ConsoleColors.CYAN) + coordinates + '\n' +
+                ConsoleColors.toColor("creationDate = ", ConsoleColors.CYAN) + creationDate + '\n' +
+                ConsoleColors.toColor("studentsCount = ", ConsoleColors.CYAN) + studentsCount + '\n' +
+                ConsoleColors.toColor("expelledStudents = ", ConsoleColors.CYAN) + expelledStudents + '\n' +
+                ConsoleColors.toColor("averageMark = ", ConsoleColors.CYAN) + averageMark + '\n' +
+                ConsoleColors.toColor("formOfEducation = ", ConsoleColors.CYAN) + formOfEducation + '\n' +
+                ConsoleColors.toColor("groupAdmin = ", ConsoleColors.CYAN) + groupAdmin + '\n' +
                 '}';
     }
 }

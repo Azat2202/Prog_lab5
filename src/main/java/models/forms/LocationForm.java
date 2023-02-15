@@ -28,9 +28,8 @@ public class LocationForm extends Form<Location>{
     }
 
     private double askX(){
-
         while (true) {
-            console.print(ConsoleColors.toColor("Введите координату X", ConsoleColors.GREEN));
+            console.println(ConsoleColors.toColor("Введите координату X", ConsoleColors.GREEN));
             String input = scanner.nextLine().trim();
             try {
                 return Double.parseDouble(input);
@@ -43,9 +42,8 @@ public class LocationForm extends Form<Location>{
     }
 
     private long askY(){
-
         while (true) {
-            console.print(ConsoleColors.toColor("Введите координату Y", ConsoleColors.GREEN));
+            console.println(ConsoleColors.toColor("Введите координату Y", ConsoleColors.GREEN));
             String input = scanner.nextLine().trim();
             try {
                 return Long.parseLong(input);
@@ -58,10 +56,9 @@ public class LocationForm extends Form<Location>{
     }
 
     private String askName(){
-        String name;
         while (true){
-            console.println(ConsoleColors.toColor("Введите имя", ConsoleColors.GREEN));
-            name = scanner.nextLine().trim();
+            console.println(ConsoleColors.toColor("Введите название локации", ConsoleColors.GREEN));
+            String name = scanner.nextLine().trim();
             if (name.isBlank()){
                 console.printError("Имя не может быть пустым");
             }
