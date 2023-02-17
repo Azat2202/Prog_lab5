@@ -10,7 +10,6 @@ import java.util.*;
 
 /* TODO:
 1. Изменить printError чтобы он брал текст из ошибки
-2. Проверить как вообще работает id
  */
 public class RuntimeManager {
     private final Printable console;

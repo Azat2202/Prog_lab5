@@ -1,0 +1,6 @@
+show
+show
+show
+save
+remove_by_id 4
+show
