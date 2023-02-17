@@ -20,15 +20,12 @@ public class AddElement extends Command{
     @Override
     public void execute(String args) throws IllegalArguments {
         if (!args.isBlank()) throw new IllegalArguments();
-        while (true) {
-            try {
-                console.println(ConsoleColors.toColor("Создание объекта StudyGroup", ConsoleColors.PURPLE));
-                collectionManager.addElement(new StudyGroupForm(console).build());
-                console.println(ConsoleColors.toColor("Создание объекта StudyGroup окончено успешно!", ConsoleColors.PURPLE));
-                return;
-            } catch (InvalidForm invalidForm) {
-                console.printError("Поля объекта не валидны! Объект не создан!");
-            }
+        try {
+            console.println(ConsoleColors.toColor("Создание объекта StudyGroup", ConsoleColors.PURPLE));
+            collectionManager.addElement(new StudyGroupForm(console).build());
+            console.println(ConsoleColors.toColor("Создание объекта StudyGroup окончено успешно!", ConsoleColors.PURPLE));
+        } catch (InvalidForm invalidForm) {
+            console.printError("Поля объекта не валидны! Объект не создан!");
         }
     }
 }

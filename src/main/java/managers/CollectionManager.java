@@ -6,17 +6,16 @@ import models.StudyGroup;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayDeque;
+import java.util.Collection;
 
 public class CollectionManager {
     private final ArrayDeque<StudyGroup> collection = new ArrayDeque<>();
     private LocalDateTime lastInitTime;
     private LocalDateTime lastSaveTime;
-    private final FileManager fileWorker;
 
-    public CollectionManager(FileManager fileWorker) {
+    public CollectionManager() {
         this.lastInitTime = LocalDateTime.now();
         this.lastSaveTime = null;
-        this.fileWorker = fileWorker;
     }
 
     public ArrayDeque<StudyGroup> getCollection() {
@@ -103,6 +102,13 @@ public class CollectionManager {
         this.lastSaveTime = LocalDateTime.now();
         if (!studyGroup.validate()) throw new InvalidForm();
         collection.add(studyGroup);
+    }
+
+    public void addElements(Collection<StudyGroup> collection) throws InvalidForm{
+        if (collection == null) return;
+        for (StudyGroup studyGroup:collection){
+            this.addElement(studyGroup);
+        }
     }
 
     public void removeElement(StudyGroup studyGroup){

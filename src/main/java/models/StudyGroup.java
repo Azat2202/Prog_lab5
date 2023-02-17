@@ -37,6 +37,11 @@ public class StudyGroup implements Validator{
         return nextId++;
     }
 
+    /**
+     * @param collection коллекция, в которой получить id.
+     * Требуется, так как xStream с помощью reflection обходит приватность id
+     */
+
     public static void updateId(ArrayDeque<StudyGroup> collection){
         nextId = collection.
                 stream().filter(Objects::nonNull)

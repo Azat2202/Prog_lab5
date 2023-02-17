@@ -4,20 +4,20 @@ import managers.*;
 import commandLine.Console;
 import commandLine.commands.*;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args){
         Console console = new Console();
-        FileManager fileWorker = new FileManager(console);
-        CollectionManager collectionManager = new CollectionManager(fileWorker);
+        CollectionManager collectionManager = new CollectionManager();
+        FileManager fileManager = new FileManager(console, collectionManager);
         CommandManager commandManager = new CommandManager();
         try{
-            fileWorker.findfile();
-            fileWorker.createObjects();
+            fileManager.findFile();
+            fileManager.createObjects();
         } catch (ExitObliged e){
             console.println(ConsoleColors.toColor("До свидания!", ConsoleColors.YELLOW));
+            return;
         }
 
         commandManager.addCommand(List.of(
@@ -27,8 +27,8 @@ public class Main {
                 new AddElement(console, collectionManager),
                 new Update(console, collectionManager),
                 new RemoveById(console, collectionManager),
-                new Clear(console, collectionManager)
-                //new Save(console, collectionManager)
+                new Clear(console, collectionManager),
+                new Save(console, fileManager)
         ));
         new RuntimeManager(console, commandManager).interactiveMode();
     }

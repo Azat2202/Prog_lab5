@@ -22,7 +22,7 @@ public class RemoveById extends Command {
 
     @Override
     public void execute(String args) throws IllegalArguments{
-        if (args.isBlank()) throw new IllegalArguments;
+        if (args.isBlank()) throw new IllegalArguments();
         class NoSuchId extends RuntimeException {
         }
         console.println(ConsoleColors.toColor("Введите id объекта", ConsoleColors.GREEN));
