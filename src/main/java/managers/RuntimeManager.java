@@ -1,10 +1,17 @@
 package managers;
 
-import managers.commandLine.*;
-import managers.commandLine.commands.Command;
+import exceptions.CommandRuntimeError;
+import exceptions.ExitObliged;
+import exceptions.IllegalArguments;
+import exceptions.NoSuchCommand;
+import commandLine.*;
 
 import java.util.*;
 
+/* TODO:
+1. Изменить printError чтобы он брал текст из ошибки
+2. Проверить как вообще работает id
+ */
 public class RuntimeManager {
     private final Printable console;
     private final CommandManager commandManager;
@@ -17,33 +24,28 @@ public class RuntimeManager {
 
     public void interactiveMode(){
         Scanner userScanner = ScannerManager.getUserScanner();
-        try{
-            ExitCode commandStatus;
-            String userCommand = "";
-            do{
-                userCommand = userScanner.nextLine().trim();
+        while (true) {
+            try{
+                String userCommand = userScanner.nextLine().trim() + " "; // прибавляем пробел, чтобы split выдал два элемента в массиве
                 commandManager.addToHistory(userCommand);
-                commandStatus = this.launch(userCommand
-                        .split(" ", 2));
+                this.launch(userCommand.split(" ", 2));
+            } catch (NoSuchElementException exception) {
+                console.printError("Пользовательский ввод не обнаружен!");
+            } catch (NoSuchCommand noSuchCommand) {
+                console.printError("Такой команды нет в списке");
+            } catch (IllegalArguments e) {
+                console.printError("Введены неправильные агрументы команды");
+            } catch (CommandRuntimeError e) {
+                console.printError("Ошибка при исполнении команды");
+            }catch (ExitObliged exitObliged){
+                console.println(ConsoleColors.toColor("До свидания!", ConsoleColors.YELLOW));
+                return;
             }
-            while (commandStatus != ExitCode.EXIT);
-        } catch (NoSuchElementException exception) {
-            console.printError("Пользовательский ввод не обнаружен!");
-        } finally {
-            console.printError("Непредвиденная ошибка!");
         }
     }
 
-    private ExitCode launch(String[] userCommand){
-        if (userCommand[0].equals("")) return ExitCode.OK;
-        Command command = commandManager.getCommands()
-                .stream().filter(s -> s.getName().equals(userCommand[0]))
-                .findFirst().orElse(null);
-        if (command == null) {
-            console.printError("Команда '" + userCommand[0] + "' не найдена. Напишите 'help' для справки");
-            return ExitCode.ERROR;
-        }
-
-        return command.execute(userCommand);
+    private void launch(String[] userCommand) throws NoSuchCommand, ExitObliged, IllegalArguments, CommandRuntimeError {
+        if (userCommand[0].equals("")) return;
+        commandManager.execute(userCommand[0], userCommand[1]);
     }
 }

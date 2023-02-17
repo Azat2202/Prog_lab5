@@ -1,6 +1,6 @@
 package models;
 
-import managers.commandLine.ConsoleColors;
+import commandLine.ConsoleColors;
 
 import java.util.Objects;
 

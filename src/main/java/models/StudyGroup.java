@@ -1,7 +1,7 @@
 package models;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
-import managers.commandLine.ConsoleColors;
+import commandLine.ConsoleColors;
 
 import java.util.ArrayDeque;
 import java.util.Date;

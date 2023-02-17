@@ -1,21 +1,24 @@
+import commandLine.ConsoleColors;
+import exceptions.ExitObliged;
 import managers.*;
-import managers.commandLine.*;
-import managers.commandLine.Console;
-import managers.commandLine.commands.*;
-import models.*;
+import commandLine.Console;
+import commandLine.commands.*;
 
-import java.io.*;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args){
         Console console = new Console();
-        FileWorker fileWorker = new FileWorker(console);
+        FileManager fileWorker = new FileManager(console);
         CollectionManager collectionManager = new CollectionManager(fileWorker);
         CommandManager commandManager = new CommandManager();
-        if (fileWorker.findfile() == ExitCode.ERROR) return;
-        if (fileWorker.createObjects() == ExitCode.ERROR) return;
+        try{
+            fileWorker.findfile();
+            fileWorker.createObjects();
+        } catch (ExitObliged e){
+            console.println(ConsoleColors.toColor("До свидания!", ConsoleColors.YELLOW));
+        }
 
         commandManager.addCommand(List.of(
                 new Help(console, commandManager),

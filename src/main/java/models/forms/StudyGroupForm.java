@@ -1,29 +1,26 @@
 package models.forms;
 
+import exceptions.InvalidForm;
 import managers.*;
-import managers.commandLine.*;
+import commandLine.*;
 import models.Coordinates;
 import models.FormOfEducation;
 import models.Person;
 import models.StudyGroup;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Scanner;
 
 public class StudyGroupForm extends Form<StudyGroup>{
     private final Console console;
-    private final CollectionManager collectionManager;
     private final Scanner scanner = ScannerManager.getUserScanner();
 
-    public StudyGroupForm(Console console, CollectionManager collectionManager) {
+    public StudyGroupForm(Console console) {
         this.console = console;
-        this.collectionManager = collectionManager;
     }
 
     @Override
-    public StudyGroup build() {
+    public StudyGroup build(){
         return new StudyGroup(
                 askName(),
                 askCoordinates(),

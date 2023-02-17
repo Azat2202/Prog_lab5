@@ -1,18 +1,19 @@
 package managers;
 
+import exceptions.InvalidForm;
 import models.StudyGroup;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayDeque;
-import java.util.Collection;
 
 public class CollectionManager {
     private final ArrayDeque<StudyGroup> collection = new ArrayDeque<>();
     private LocalDateTime lastInitTime;
     private LocalDateTime lastSaveTime;
-    private final FileWorker fileWorker;
+    private final FileManager fileWorker;
 
-    public CollectionManager(FileWorker fileWorker) {
+    public CollectionManager(FileManager fileWorker) {
         this.lastInitTime = LocalDateTime.now();
         this.lastSaveTime = null;
         this.fileWorker = fileWorker;
@@ -22,12 +23,21 @@ public class CollectionManager {
         return collection;
     }
 
-    public LocalDateTime getLastInitTime() {
-        return lastInitTime;
+    private String timeFormatter(LocalDateTime localDateTime){
+        if (localDateTime == null) return null;
+        if (localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+                .equals(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))){
+            return localDateTime.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+        }
+        return localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
 
-    public LocalDateTime getLastSaveTime() {
-        return lastSaveTime;
+    public String getLastInitTime() {
+        return timeFormatter(lastInitTime);
+    }
+
+    public String getLastSaveTime() {
+        return timeFormatter(lastSaveTime);
     }
     /**
      * @return Имя типа коллекции.
@@ -72,7 +82,7 @@ public class CollectionManager {
         return null;
     }
 
-    public void editById(int id, StudyGroup newElement, ArrayDeque<StudyGroup> collection){
+    public void editById(int id, StudyGroup newElement, ArrayDeque<StudyGroup> collection) throws InvalidForm{
         StudyGroup pastElement = this.getById(id);
         this.removeElement(pastElement);
         newElement.setId(id);
@@ -89,8 +99,9 @@ public class CollectionManager {
                 .anyMatch((x) -> x.getId() == id);
     }
 
-    public void addElement(StudyGroup studyGroup){
+    public void addElement(StudyGroup studyGroup) throws InvalidForm{
         this.lastSaveTime = LocalDateTime.now();
+        if (!studyGroup.validate()) throw new InvalidForm();
         collection.add(studyGroup);
     }
 

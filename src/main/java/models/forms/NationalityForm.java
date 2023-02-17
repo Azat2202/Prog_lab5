@@ -1,6 +1,6 @@
 package models.forms;
 
-import managers.commandLine.*;
+import commandLine.*;
 import models.Country;
 
 import java.util.Locale;
@@ -19,7 +19,7 @@ public class NationalityForm extends Form<Country>{
         console.println("Возможные страны: ");
         console.println(Country.names());
         while (true){
-            console.println(Console.toColor("Введите страну: ", ConsoleColors.GREEN));
+            console.println(ConsoleColors.toColor("Введите страну: ", ConsoleColors.GREEN));
             String input = scanner.nextLine().trim();
             try{
                 return Country.valueOf(input.toUpperCase(Locale.ROOT));

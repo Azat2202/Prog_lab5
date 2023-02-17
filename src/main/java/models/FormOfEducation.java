@@ -9,6 +9,6 @@ public enum FormOfEducation {
         for (var forms : values()) {
             nameList.append(forms.name()).append("\n");
         }
-        return nameList.substring(0, nameList.length()-2);
+        return nameList.substring(0, nameList.length()-1);
     }
 }

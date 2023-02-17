@@ -1,6 +1,7 @@
 package models.forms;
 
-import managers.commandLine.*;
+import exceptions.InvalidForm;
+import commandLine.*;
 import models.Coordinates;
 
 import java.util.Scanner;
@@ -13,13 +14,8 @@ public class CoordinatesForm extends Form<Coordinates>{
         this.console = console;
     }
     @Override
-    public Coordinates build() throws InvalidForm{
-        Coordinates coordinates = new Coordinates(askX(), askY());
-        if (!coordinates.validate()) {
-            console.printError("Невалидные координаты попробуйте снова");
-            throw new InvalidForm();
-        };
-        return coordinates;
+    public Coordinates build(){
+        return new Coordinates(askX(), askY());
     }
 
     private Float askX(){

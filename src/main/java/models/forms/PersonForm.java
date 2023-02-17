@@ -1,6 +1,7 @@
 package models.forms;
 
-import managers.commandLine.*;
+import exceptions.InvalidForm;
+import commandLine.*;
 import models.Color;
 import models.Country;
 import models.Location;
@@ -28,11 +29,6 @@ public class PersonForm extends Form<Person>{
                 askNationality(),
                 askLocation()
         );
-        if (!person.validate()) {
-            console.printError("Невалидные координаты попробуйте снова");
-            throw new InvalidForm();
-        };
-
         console.println(ConsoleColors.toColor("Создание объекта админа окончено успешно", ConsoleColors.PURPLE));
         return person;
     }

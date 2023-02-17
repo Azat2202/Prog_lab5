@@ -1,7 +1,7 @@
 package models.forms;
 
-import managers.commandLine.*;
-import models.Coordinates;
+import exceptions.InvalidForm;
+import commandLine.*;
 import models.Location;
 
 import java.util.Scanner;
@@ -15,16 +15,11 @@ public class LocationForm extends Form<Location>{
     }
 
     @Override
-    public Location build() throws InvalidForm{
-        Location location = new Location(
+    public Location build(){
+        return new Location(
                 askX(),
                 askY(),
                 askName());
-        if (!location.validate()) {
-            console.printError("Невалидная локация попробуйте снова");
-            throw new InvalidForm();
-        };
-        return location;
     }
 
     private double askX(){

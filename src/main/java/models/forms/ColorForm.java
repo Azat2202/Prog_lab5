@@ -1,8 +1,7 @@
 package models.forms;
 
-import managers.commandLine.*;
+import commandLine.*;
 import models.Color;
-import models.FormOfEducation;
 
 import java.util.Locale;
 import java.util.Scanner;
@@ -22,7 +21,7 @@ public class ColorForm extends Form<Color>{
         console.println("Возможные цвета: ");
         console.println(Color.names());
         while (true){
-            console.println(Console.toColor("Введите цвет " + type + ": ", ConsoleColors.GREEN));
+            console.println(ConsoleColors.toColor("Введите цвет " + type + ": ", ConsoleColors.GREEN));
             String input = scanner.nextLine().trim();
             try{
                 return Color.valueOf(input.toUpperCase(Locale.ROOT));

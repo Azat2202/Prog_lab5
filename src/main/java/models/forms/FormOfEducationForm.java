@@ -1,6 +1,6 @@
 package models.forms;
 
-import managers.commandLine.*;
+import commandLine.*;
 import models.FormOfEducation;
 
 import java.util.Locale;
@@ -19,7 +19,7 @@ public class FormOfEducationForm extends Form<FormOfEducation>{
         console.println("Возможные формы обучения: ");
         console.println(FormOfEducation.names());
         while (true){
-            console.println(Console.toColor("Введите форму обучения: ", ConsoleColors.GREEN));
+            console.println(ConsoleColors.toColor("Введите форму обучения: ", ConsoleColors.GREEN));
             String input = scanner.nextLine().trim();
             try{
                 return FormOfEducation.valueOf(input.toUpperCase(Locale.ROOT));
