@@ -18,7 +18,7 @@ public class Update extends Command{
     private final Scanner scanner = ScannerManager.getUserScanner();
 
     public Update(Console console, CollectionManager collectionManager) {
-        super("update", "id {element} : обновить значение элемента коллекции, id которого равен заданному");
+        super("update", " id {element}: обновить значение элемента коллекции, id которого равен заданному");
         this.collectionManager = collectionManager;
         this.console = console;
     }

@@ -6,18 +6,18 @@ import commandLine.commands.*;
 
 import java.util.List;
 
-/* TODO:
-1. Изменить printError чтобы он брал текст из ошибки
-2. execute_script RECURSION
-3. exit
-4. sorting
-5. add_if_max
-6. remove_greater
-7. history
-8. remove_all_by_average_mark
-9. count_by_average_mark
-10. count_less_than_expelled_students
-11. safe ^C and ^D
+/*
+TODO
+    Изменить printError чтобы он брал текст из ошибки
+    sorting
+    add_if_max
+    remove_greater
+    history
+    remove_all_by_average_mark
+    count_by_average_mark
+    count_less_than_expelled_students
+FIXME
+    remove_by_id takes args
  */
 
 public class Main {
@@ -43,7 +43,8 @@ public class Main {
                 new RemoveById(console, collectionManager),
                 new Clear(console, collectionManager),
                 new Save(console, fileManager),
-                new Execute(console, fileManager)
+                new Execute(console, fileManager, commandManager),
+                new Exit()
         ));
         new RuntimeManager(console, commandManager).interactiveMode();
     }

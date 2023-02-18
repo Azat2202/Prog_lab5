@@ -1,6 +1,6 @@
 show
-show
-show
-save
-remove_by_id 4
-show
+
+
+
+execute_script C:\Users\azat2\IdeaProjects\Prog_lab5\sample_text.txt
+execute_script C:\Users\azat2\IdeaProjects\Prog_lab5\sample_text.txt

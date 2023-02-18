@@ -15,20 +15,18 @@ public class RemoveById extends Command {
     private final Scanner scanner = ScannerManager.getUserScanner();
 
     public RemoveById(Console console, CollectionManager collectionManager) {
-        super("remove_by_id", "id : удалить элемент из коллекции по его id");
+        super("remove_by_id", "id: удалить элемент из коллекции по его id");
         this.collectionManager = collectionManager;
         this.console = console;
     }
 
     @Override
     public void execute(String args) throws IllegalArguments{
-        if (args.isBlank()) throw new IllegalArguments();
+        if (!args.isBlank()) throw new IllegalArguments();
         class NoSuchId extends RuntimeException {
         }
-        console.println(ConsoleColors.toColor("Введите id объекта", ConsoleColors.GREEN));
-        String input = scanner.nextLine().trim();
         try {
-            int id = Integer.parseInt(input.trim());
+            int id = Integer.parseInt(args.trim());
             if (!collectionManager.checkExist(id)) throw new NoSuchId();
             collectionManager.removeElement(collectionManager.getById(id));
             console.println(ConsoleColors.toColor("Объект удален успешно", ConsoleColors.GREEN));
@@ -37,6 +35,5 @@ public class RemoveById extends Command {
         } catch (NumberFormatException exception) {
             console.printError("id должно быть числом типа int");
         }
-        ;
     }
 }

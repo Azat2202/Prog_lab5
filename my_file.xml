@@ -75,31 +75,6 @@
     </groupAdmin>
   </StudyGroup>
   <StudyGroup>
-    <id>4</id>
-    <name>Azat</name>
-    <coordinates>
-      <x>10.1</x>
-      <y>10.5</y>
-    </coordinates>
-    <creationDate class="sql-timestamp">2023-02-15 16:35:20.9908974</creationDate>
-    <studentsCount>10</studentsCount>
-    <expelledStudents>6</expelledStudents>
-    <averageMark>4</averageMark>
-    <formOfEducation>FULL_TIME_EDUCATION</formOfEducation>
-    <groupAdmin>
-      <name>admin</name>
-      <weight>55</weight>
-      <eyeColor>WHITE</eyeColor>
-      <hairColor>BROWN</hairColor>
-      <nationality>FRANCE</nationality>
-      <location>
-        <x>15.0</x>
-        <y>10</y>
-        <name>Home</name>
-      </location>
-    </groupAdmin>
-  </StudyGroup>
-  <StudyGroup>
     <id>5</id>
     <name>AzatLast</name>
     <coordinates>
@@ -124,6 +99,6 @@
       </location>
     </groupAdmin>
   </StudyGroup>
-  <lastInitTime>2023-02-17T20:23:21.9417703</lastInitTime>
-  <lastSaveTime>2023-02-17T20:24:03.2296933</lastSaveTime>
+  <lastInitTime>2023-02-18T03:00:20.1916199</lastInitTime>
+  <lastSaveTime>2023-02-18T03:00:21.6776889</lastSaveTime>
 </Array>

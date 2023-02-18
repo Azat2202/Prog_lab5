@@ -8,9 +8,6 @@ import commandLine.*;
 
 import java.util.*;
 
-/* TODO:
-1. Изменить printError чтобы он брал текст из ошибки
- */
 public class RuntimeManager {
     private final Printable console;
     private final CommandManager commandManager;
@@ -25,6 +22,7 @@ public class RuntimeManager {
         Scanner userScanner = ScannerManager.getUserScanner();
         while (true) {
             try{
+                if (!userScanner.hasNext()) throw new ExitObliged();
                 String userCommand = userScanner.nextLine().trim() + " "; // прибавляем пробел, чтобы split выдал два элемента в массиве
                 commandManager.addToHistory(userCommand);
                 this.launch(userCommand.split(" ", 2));
@@ -33,17 +31,17 @@ public class RuntimeManager {
             } catch (NoSuchCommand noSuchCommand) {
                 console.printError("Такой команды нет в списке");
             } catch (IllegalArguments e) {
-                console.printError("Введены неправильные агрументы команды");
+                console.printError("Введены неправильные аргументы команды");
             } catch (CommandRuntimeError e) {
                 console.printError("Ошибка при исполнении команды");
-            }catch (ExitObliged exitObliged){
+            } catch (ExitObliged exitObliged){
                 console.println(ConsoleColors.toColor("До свидания!", ConsoleColors.YELLOW));
                 return;
             }
         }
     }
 
-    private void launch(String[] userCommand) throws NoSuchCommand, ExitObliged, IllegalArguments, CommandRuntimeError {
+    public void launch(String[] userCommand) throws NoSuchCommand, ExitObliged, IllegalArguments, CommandRuntimeError {
         if (userCommand[0].equals("")) return;
         commandManager.execute(userCommand[0], userCommand[1]);
     }

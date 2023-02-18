@@ -10,7 +10,7 @@ public class Save extends Command{
     private Console console;
 
     public Save(Console console, FileManager fileManager) {
-        super("save", "сохранить коллекцию в файл");
+        super("save", ": сохранить коллекцию в файл");
         this.fileManager = fileManager;
         this.console = console;
     }

@@ -9,7 +9,7 @@ public class Info extends Command{
     private Console console;
 
     public Info(Console console, CollectionManager collectionManager) {
-        super("info", "вывести в стандартный поток вывода информацию о коллекции (тип, дата инициализации, количество элементов и т.д.)");
+        super("info", ": вывести в стандартный поток вывода информацию о коллекции (тип, дата инициализации, количество элементов и т.д.)");
         this.collectionManager = collectionManager;
         this.console = console;
     }

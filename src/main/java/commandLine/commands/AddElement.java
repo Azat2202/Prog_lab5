@@ -12,7 +12,7 @@ public class AddElement extends Command{
     private Console console;
 
     public AddElement(Console console, CollectionManager collectionManager) {
-        super("add", "{element} добавить новый элемент в коллекцию");
+        super("add", " {element}: добавить новый элемент в коллекцию");
         this.collectionManager = collectionManager;
         this.console = console;
     }
