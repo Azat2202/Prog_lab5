@@ -3,8 +3,8 @@
     <id>1</id>
     <name>Azat</name>
     <coordinates>
-      <x>10.1</x>
-      <y>10.5</y>
+      <x>10</x>
+      <y>10</y>
     </coordinates>
     <creationDate class="sql-timestamp">2023-02-15 16:35:20.9908974</creationDate>
     <studentsCount>10</studentsCount>
@@ -28,8 +28,8 @@
     <id>2</id>
     <name>Azat</name>
     <coordinates>
-      <x>10.1</x>
-      <y>10.5</y>
+      <x>5</x>
+      <y>5</y>
     </coordinates>
     <creationDate class="sql-timestamp">2023-02-15 16:35:20.9908974</creationDate>
     <studentsCount>10</studentsCount>

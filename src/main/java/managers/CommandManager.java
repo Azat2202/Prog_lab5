@@ -23,9 +23,12 @@ public class CommandManager{
     public Collection<Command> getCommands(){
         return commands.values();
     }
+
     public void addToHistory(String line){
         this.commandHistory.add(line);
     }
+
+    public List<String> getCommandHistory(){return commandHistory;}
 
     public void execute(String name, String args) throws NoSuchCommand, IllegalArguments, CommandRuntimeError, ExitObliged {
         Command command = commands.get(name);

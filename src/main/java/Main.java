@@ -7,17 +7,19 @@ import commandLine.commands.*;
 import java.util.List;
 
 /*
+ADDED = in this commit
 TODO
-    Изменить printError чтобы он брал текст из ошибки
-    sorting
-    add_if_max
-    remove_greater
-    history
-    remove_all_by_average_mark
+    **ADDED** sorting
+    **ADDED** add_if_max
+    **ADDED** remove_greater
+    **ADDED** history
+    **ADDED** remove_all_by_average_mark
     count_by_average_mark
     count_less_than_expelled_students
+    javadoc
+    Изменить printError чтобы он брал текст из ошибки
 FIXME
-    remove_by_id takes args
+    **FIXED** remove_by_id takes args
  */
 
 public class Main {
@@ -44,7 +46,11 @@ public class Main {
                 new Clear(console, collectionManager),
                 new Save(console, fileManager),
                 new Execute(console, fileManager, commandManager),
-                new Exit()
+                new Exit(),
+                new AddIfMax(console, collectionManager),
+                new RemoveGreater(console, collectionManager),
+                new History(console, commandManager),
+                new RemoveAllByAverageMark(console, collectionManager)
         ));
         new RuntimeManager(console, commandManager).interactiveMode();
     }

@@ -115,6 +115,8 @@ public class CollectionManager {
         collection.remove(studyGroup);
     }
 
+    public void removeElements(Collection<StudyGroup> collection){this.collection.removeAll(collection);}
+
     @Override
     public String toString() {
         if (collection.isEmpty()) return "Коллекция пуста!";

@@ -34,8 +34,10 @@ public class FileManager {
 
     public void findFile() throws ExitObliged{
         String file_path = System.getenv("file_path");
-        if (file_path == null || file_path.isEmpty())
+        if (file_path == null || file_path.isEmpty()) {
             console.printError("Путь должен быть в переменных окружения в перменной 'file_path'");
+            throw new ExitObliged();
+        }
         else console.println(ConsoleColors.toColor("Путь получен успешно", ConsoleColors.PURPLE));
 
         File file = new File(file_path);

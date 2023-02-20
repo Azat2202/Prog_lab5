@@ -15,14 +15,14 @@ public class RemoveById extends Command {
     private final Scanner scanner = ScannerManager.getUserScanner();
 
     public RemoveById(Console console, CollectionManager collectionManager) {
-        super("remove_by_id", "id: удалить элемент из коллекции по его id");
+        super("remove_by_id", " id: удалить элемент из коллекции по его id");
         this.collectionManager = collectionManager;
         this.console = console;
     }
 
     @Override
     public void execute(String args) throws IllegalArguments{
-        if (!args.isBlank()) throw new IllegalArguments();
+        if (args.isBlank()) throw new IllegalArguments();
         class NoSuchId extends RuntimeException {
         }
         try {

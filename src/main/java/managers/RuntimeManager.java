@@ -11,7 +11,6 @@ import java.util.*;
 public class RuntimeManager {
     private final Printable console;
     private final CommandManager commandManager;
-    private final List<String> scriptStack = new ArrayList<>();
 
     public RuntimeManager(Console console, CommandManager commandManager) {
         this.console = console;
@@ -24,8 +23,8 @@ public class RuntimeManager {
             try{
                 if (!userScanner.hasNext()) throw new ExitObliged();
                 String userCommand = userScanner.nextLine().trim() + " "; // прибавляем пробел, чтобы split выдал два элемента в массиве
-                commandManager.addToHistory(userCommand);
                 this.launch(userCommand.split(" ", 2));
+                commandManager.addToHistory(userCommand);
             } catch (NoSuchElementException exception) {
                 console.printError("Пользовательский ввод не обнаружен!");
             } catch (NoSuchCommand noSuchCommand) {

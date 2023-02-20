@@ -2,13 +2,19 @@ package models;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import commandLine.ConsoleColors;
+import models.forms.CoordinatesForm;
 
 import java.util.ArrayDeque;
 import java.util.Date;
 import java.util.Objects;
 
+@FunctionalInterface
+interface CoordinatesRange<T, E>{
+    float getDistanceFromCentre(T x, E y);
+}
+
 @XStreamAlias("StudyGroup")
-public class StudyGroup implements Validator{
+public class StudyGroup implements Validator, Comparable<StudyGroup>{
     private Integer id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null
@@ -120,6 +126,15 @@ public class StudyGroup implements Validator{
 
     public void setGroupAdmin(Person groupAdmin) {
         this.groupAdmin = groupAdmin;
+    }
+
+    @Override
+    public int compareTo(StudyGroup o) {
+        if (Objects.isNull(o)) return 1;
+        CoordinatesRange<Float, Double> calc = (x, y) -> (float) Math.sqrt(x * x + y * y);
+        return Float.compare(
+                calc.getDistanceFromCentre(this.getCoordinates().getX(), this.getCoordinates().getY()),
+                calc.getDistanceFromCentre(o.getCoordinates().getX(), o.getCoordinates().getY()));
     }
 
     @Override
