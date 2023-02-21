@@ -4,13 +4,24 @@ import exceptions.InvalidForm;
 import models.StudyGroup;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayDeque;
 import java.util.Collection;
+import java.util.Date;
 
+/**
+ * Класс организующий работу с коллекцией
+ */
 public class CollectionManager {
     private final ArrayDeque<StudyGroup> collection = new ArrayDeque<>();
+    /**
+     * Дата создания коллекции
+     */
     private LocalDateTime lastInitTime;
+    /**
+     * Дата последнего изменения коллекции
+     */
     private LocalDateTime lastSaveTime;
 
     public CollectionManager() {
@@ -22,10 +33,32 @@ public class CollectionManager {
         return collection;
     }
 
-    private String timeFormatter(LocalDateTime localDateTime){
+    /**
+     * Метод скрывающий дату, если она сегодняшняя
+     * @param localDateTime объект {@link LocalDateTime}
+     * @return вывод даты
+     */
+    public static String timeFormatter(LocalDateTime localDateTime){
         if (localDateTime == null) return null;
-        if (localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
-                .equals(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))){
+        if (localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                .equals(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))){
+            return localDateTime.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+        }
+        return localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    }
+
+    /**
+     * Метод скрывающий дату, если она сегодняшняя
+     * @param dateToConvert объект {@link Date}
+     * @return вывод даты
+     */
+    public static String timeFormatter(Date dateToConvert){
+        LocalDateTime localDateTime = dateToConvert.toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDateTime();
+        if (localDateTime == null) return null;
+        if (localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                .equals(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))){
             return localDateTime.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
         }
         return localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
@@ -45,27 +78,15 @@ public class CollectionManager {
         return collection.getClass().getName();
     }
 
-    /**
-     * @return Размер коллекции.
-     */
     public int collectionSize() {
         return collection.size();
-    }
-    /**
-     * @return Первый элемент коллекции (null если коллекция пустая).
-     */
-    public StudyGroup getFirst() {
-        if (collection.isEmpty()) return null;
-        return collection.peek();
     }
 
     public void clear(){
         this.collection.clear();
         lastInitTime = LocalDateTime.now();
     }
-    /**
-     * @return Последний элемент коллекции (null если коллекция пустая).
-     */
+
     public StudyGroup getLast() {
         return collection.getLast();
     }
@@ -81,12 +102,18 @@ public class CollectionManager {
         return null;
     }
 
-    public void editById(int id, StudyGroup newElement, ArrayDeque<StudyGroup> collection) throws InvalidForm{
+    /**
+     * Изменить элемент коллекции с таким id
+     * @param id id
+     * @param newElement новый элемент
+     * @throws InvalidForm Нет элемента с таким id
+     */
+    public void editById(int id, StudyGroup newElement) throws InvalidForm{
         StudyGroup pastElement = this.getById(id);
         this.removeElement(pastElement);
         newElement.setId(id);
         this.addElement(newElement);
-        StudyGroup.updateId(collection);
+        StudyGroup.updateId(this.getCollection());
     }
 
     /**

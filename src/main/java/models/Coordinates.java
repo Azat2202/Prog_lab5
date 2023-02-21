@@ -2,6 +2,10 @@ package models;
 
 import java.util.Objects;
 
+/**
+ * Класс координат
+ * @author azat2202
+ */
 public class Coordinates implements Validator{
     private float x; //Значение поля должно быть больше -206
     private Double y; //Максимальное значение поля: 463, Поле не может быть null
@@ -27,6 +31,10 @@ public class Coordinates implements Validator{
         this.y = y;
     }
 
+    /**
+     * Валидирует правильность полей.
+     * @return true, если все верно, иначе false
+     */
     @Override
     public boolean validate() {
         if (this.x <= -206) return false;

@@ -4,6 +4,10 @@ import commandLine.ConsoleColors;
 
 import java.util.Objects;
 
+/**
+ * Класс человека
+ * @author azat2202
+ */
 public class Person implements Validator{
     private String name; //Поле не может быть null, Строка не может быть пустой
     private int weight; //Значение поля должно быть больше 0
@@ -69,6 +73,10 @@ public class Person implements Validator{
         this.location = location;
     }
 
+    /**
+     * Валидирует правильность полей.
+     * @return true, если все верно, иначе false
+     */
     @Override
     public boolean validate() {
         if (this.name == null || this.name.isEmpty()) return false;

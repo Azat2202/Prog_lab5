@@ -4,6 +4,10 @@ import exceptions.IllegalArguments;
 import managers.CollectionManager;
 import commandLine.*;
 
+/**
+ * Команда 'info'
+ * Выводит в стандартный поток вывода информацию о коллекции (тип, дата инициализации, количество элементов и т.д.)
+ */
 public class Info extends Command{
     private CollectionManager collectionManager;
     private Console console;
@@ -14,6 +18,11 @@ public class Info extends Command{
         this.console = console;
     }
 
+    /**
+     * Исполнить команду
+     * @param args аргументы команды
+     * @throws IllegalArguments неверные аргументы команды
+     */
     @Override
     public void execute(String args) throws IllegalArguments {
         if (!args.isBlank()) throw new IllegalArguments();

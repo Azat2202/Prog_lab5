@@ -6,6 +6,9 @@ import models.Color;
 import java.util.Locale;
 import java.util.Scanner;
 
+/**
+ * Форма для выбора цвета
+ */
 public class ColorForm extends Form<Color>{
     private final Console console;
     private final Scanner scanner = ScannerManager.getUserScanner();
@@ -15,7 +18,10 @@ public class ColorForm extends Form<Color>{
         this.console = console;
         this.type = type;
     }
-
+    /**
+     * Сконструировать новый элемент класса {@link Color}
+     * @return объект класса {@link Color}
+     */
     @Override
     public Color build() {
         console.println("Возможные цвета: ");

@@ -4,6 +4,9 @@ import commandLine.Executable;
 
 import java.util.Objects;
 
+/**
+ * Абстрактный класс для всех команд
+ */
 public abstract class Command implements Executable {
     private final String name;
     private final String description;

@@ -1,7 +1,7 @@
 package commandLine;
 
 /**
- * Класс для вывода в консоль
+ * Класс для вывода в стандартную консоль
  */
 public class Console implements Printable {
 

@@ -8,6 +8,10 @@ import commandLine.ScannerManager;
 
 import java.util.Scanner;
 
+/**
+ * Команда 'remove_by_id'
+ * Удаляет элемент из коллекции по его id
+ */
 public class RemoveById extends Command {
     private CollectionManager collectionManager;
     private Console console;
@@ -20,6 +24,11 @@ public class RemoveById extends Command {
         this.console = console;
     }
 
+    /**
+     * Исполнить команду
+     * @param args аргументы команды
+     * @throws IllegalArguments неверные аргументы команды
+     */
     @Override
     public void execute(String args) throws IllegalArguments{
         if (args.isBlank()) throw new IllegalArguments();

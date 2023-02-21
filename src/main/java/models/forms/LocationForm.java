@@ -6,6 +6,9 @@ import models.Location;
 
 import java.util.Scanner;
 
+/**
+ * Форма для локации
+ */
 public class LocationForm extends Form<Location>{
     private final Console console;
     private final Scanner scanner = ScannerManager.getUserScanner();
@@ -14,6 +17,10 @@ public class LocationForm extends Form<Location>{
         this.console = console;
     }
 
+    /**
+     * Сконструировать новый элемент класса {@link Location}
+     * @return объект класса {@link Location}
+     */
     @Override
     public Location build(){
         return new Location(

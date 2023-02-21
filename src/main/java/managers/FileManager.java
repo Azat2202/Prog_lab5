@@ -16,12 +16,21 @@ import java.time.LocalDateTime;
 import java.util.ArrayDeque;
 import java.util.Date;
 
+/**
+ * Класс реализующий работу с файлами
+ * @author azat2202
+ */
 public class FileManager {
     private String text;
-    private Printable console;
-    private CollectionManager collectionManager;
-    private XStream xStream = new XStream();
+    private final Printable console;
+    private final CollectionManager collectionManager;
+    private final XStream xStream = new XStream();
 
+    /**
+     * В конструкторе задаются алиасы для библиотеки {@link XStream} которая используется для работы с xml
+     * @param console Пользовательский ввод-вывод
+     * @param collectionManager Работа с коллекцией
+     */
     public FileManager(Console console, CollectionManager collectionManager) {
         this.console = console;
         this.collectionManager = collectionManager;
@@ -32,6 +41,10 @@ public class FileManager {
         this.xStream.addImplicitCollection(CollectionManager.class, "collection");
     }
 
+    /**
+     * Обращение к переменным среды и чтение файла в поле по указанному пути
+     * @throws ExitObliged если путь - null или отсутствует программа заканчивает выполнение
+     */
     public void findFile() throws ExitObliged{
         String file_path = System.getenv("file_path");
         if (file_path == null || file_path.isEmpty()) {
@@ -66,6 +79,10 @@ public class FileManager {
         }
     }
 
+    /**
+     * Создание объектов в консольном менеджере
+     * @throws ExitObliged Если объекты в файле невалидны выходим из программы
+     */
     public void createObjects() throws ExitObliged{
         XStream xstream = new XStream();
         xstream.alias("StudyGroup", StudyGroup.class);
@@ -82,6 +99,9 @@ public class FileManager {
         StudyGroup.updateId(collectionManager.getCollection());
     }
 
+    /**
+     * Сохраняем коллекцию из менеджера в файл
+     */
     public void saveObjects(){
         String file_path = System.getenv("file_path");
         if (file_path == null || file_path.isEmpty())
@@ -97,9 +117,5 @@ public class FileManager {
         }catch (IOException e){
             console.printError("Ошибка ввода вывода");
         }
-    }
-
-    private Date convertToDateViaSqlTimestamp(LocalDateTime dateToConvert) {
-        return java.sql.Timestamp.valueOf(dateToConvert);
     }
 }

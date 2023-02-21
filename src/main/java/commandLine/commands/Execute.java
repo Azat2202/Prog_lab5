@@ -14,6 +14,10 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.NoSuchElementException;
 
+/**
+ * Команда 'execute_script'
+ * Считатывает и исполняет скрипт из указанного файла. В скрипте содержатся команды в таком же виде, в котором их вводит пользователь в интерактивном режиме.
+ */
 public class Execute extends Command{
     private FileManager fileManager;
     private Console console;
@@ -25,6 +29,13 @@ public class Execute extends Command{
         this.commandManager = commandManager;
     }
 
+    /**
+     * Исполнить команду
+     * @param args аргументы команды
+     * @throws IllegalArguments неверные аргументы команды
+     * @throws CommandRuntimeError команда вызваола ошибку при исполнении
+     * @throws ExitObliged требуется выход из программы
+     */
     @Override
     public void execute(String args) throws CommandRuntimeError, ExitObliged, IllegalArguments {
         if (args == null || args.isEmpty()) {

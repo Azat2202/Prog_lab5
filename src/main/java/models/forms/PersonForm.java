@@ -2,13 +2,13 @@ package models.forms;
 
 import exceptions.InvalidForm;
 import commandLine.*;
-import models.Color;
-import models.Country;
-import models.Location;
-import models.Person;
+import models.*;
 
 import java.util.Scanner;
 
+/**
+ * Форма для создания человека
+ */
 public class PersonForm extends Form<Person>{
 
     private final Console console;
@@ -18,6 +18,10 @@ public class PersonForm extends Form<Person>{
         this.console = console;
     }
 
+    /**
+     * Сконструировать новый элемент класса {@link Person}
+     * @return объект класса {@link Person}
+     */
     @Override
     public Person build() {
         console.println(ConsoleColors.toColor("Создание объекта админа", ConsoleColors.PURPLE));

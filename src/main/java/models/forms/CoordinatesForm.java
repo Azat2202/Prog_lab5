@@ -6,6 +6,9 @@ import models.Coordinates;
 
 import java.util.Scanner;
 
+/**
+ * Форма для координат
+ */
 public class CoordinatesForm extends Form<Coordinates>{
     private final Console console;
     private final Scanner scanner = ScannerManager.getUserScanner();
@@ -13,6 +16,11 @@ public class CoordinatesForm extends Form<Coordinates>{
     public CoordinatesForm(Console console) {
         this.console = console;
     }
+
+    /**
+     * Сконструировать новый элемент класса {@link Coordinates}
+     * @return объект класса {@link Coordinates}
+     */
     @Override
     public Coordinates build(){
         return new Coordinates(askX(), askY());

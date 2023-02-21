@@ -9,17 +9,10 @@ import java.util.List;
 /*
 ADDED = in this commit
 TODO
-    **ADDED** sorting
-    **ADDED** add_if_max
-    **ADDED** remove_greater
-    **ADDED** history
-    **ADDED** remove_all_by_average_mark
-    count_by_average_mark
-    count_less_than_expelled_students
-    javadoc
-    Изменить printError чтобы он брал текст из ошибки
-FIXME
-    **FIXED** remove_by_id takes args
+    **ADDED** count_by_average_mark
+    **ADDED** count_less_than_expelled_students
+    **ADDED** javadoc
+    **WILL NOT ADD** Изменить printError чтобы он брал текст из ошибки
  */
 
 public class Main {
@@ -50,7 +43,9 @@ public class Main {
                 new AddIfMax(console, collectionManager),
                 new RemoveGreater(console, collectionManager),
                 new History(console, commandManager),
-                new RemoveAllByAverageMark(console, collectionManager)
+                new RemoveAllByAverageMark(console, collectionManager),
+                new CountByAverageMark(console, collectionManager),
+                new CountLessThanExpelledStudents(console, collectionManager)
         ));
         new RuntimeManager(console, commandManager).interactiveMode();
     }

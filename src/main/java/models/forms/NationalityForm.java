@@ -6,6 +6,9 @@ import models.Country;
 import java.util.Locale;
 import java.util.Scanner;
 
+/**
+ * Форма для национальности
+ */
 public class NationalityForm extends Form<Country>{
     private final Console console;
     private final Scanner scanner = ScannerManager.getUserScanner();
@@ -14,6 +17,10 @@ public class NationalityForm extends Form<Country>{
         this.console = console;
     }
 
+    /**
+     * Сконструировать новый элемент Enum {@link NationalityForm}
+     * @return объект Enum {@link NationalityForm}
+     */
     @Override
     public Country build() {
         console.println("Возможные страны: ");

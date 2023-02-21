@@ -11,6 +11,10 @@ import models.forms.StudyGroupForm;
 
 import java.util.Objects;
 
+/**
+ * Команда 'add_if_max'
+ * Добавляет элемент в коллекцию если он больше максмального
+ */
 public class AddIfMax extends Command{
     private CollectionManager collectionManager;
     private Console console;
@@ -21,6 +25,11 @@ public class AddIfMax extends Command{
         this.console = console;
     }
 
+    /**
+     * Исполнить команду
+     * @param args аргументы команды
+     * @throws IllegalArguments неверные аргументы команды
+     */
     @Override
     public void execute(String args) throws IllegalArguments {
         if (!args.isBlank()) throw new IllegalArguments();

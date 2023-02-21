@@ -10,6 +10,10 @@ import models.forms.StudyGroupForm;
 import java.util.Collection;
 import java.util.Objects;
 
+/**
+ * Команда 'remove_greater'
+ * Удаляет из коллекции все элементы, превышающие заданный
+ */
 public class RemoveGreater extends Command{
     private CollectionManager collectionManager;
     private Console console;
@@ -20,6 +24,11 @@ public class RemoveGreater extends Command{
         this.console = console;
     }
 
+    /**
+     * Исполнить команду
+     * @param args аргументы команды
+     * @throws IllegalArguments неверные аргументы команды
+     */
     @Override
     public void execute(String args) throws IllegalArguments {
         if (!args.isBlank()) throw new IllegalArguments();

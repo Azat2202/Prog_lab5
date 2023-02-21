@@ -5,6 +5,10 @@ import commandLine.ConsoleColors;
 import exceptions.IllegalArguments;
 import managers.FileManager;
 
+/**
+ * Команда 'save'
+ * Сохраняет коллекцию в файл
+ */
 public class Save extends Command{
     private FileManager fileManager;
     private Console console;
@@ -15,6 +19,11 @@ public class Save extends Command{
         this.console = console;
     }
 
+    /**
+     * Исполнить команду
+     * @param args аргументы команды
+     * @throws IllegalArguments неверные аргументы команды
+     */
     @Override
     public void execute(String args) throws IllegalArguments {
         if (!args.isBlank()) throw new IllegalArguments();

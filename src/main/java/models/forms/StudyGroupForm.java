@@ -11,6 +11,10 @@ import models.StudyGroup;
 import java.util.Date;
 import java.util.Scanner;
 
+/**
+ * Форма учебной группы
+ * @author azat2202
+ */
 public class StudyGroupForm extends Form<StudyGroup>{
     private final Console console;
     private final Scanner scanner = ScannerManager.getUserScanner();
@@ -19,6 +23,10 @@ public class StudyGroupForm extends Form<StudyGroup>{
         this.console = console;
     }
 
+    /**
+     * Сконструировать новый элемент класса {@link StudyGroup}
+     * @return объект класса {@link StudyGroup}
+     */
     @Override
     public StudyGroup build(){
         return new StudyGroup(

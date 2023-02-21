@@ -2,6 +2,10 @@ package models;
 
 import java.util.Objects;
 
+/**
+ * Класс локации
+ * @author azat2202
+ */
 public class Location implements Validator{
     private double x;
     private long y;
@@ -37,6 +41,10 @@ public class Location implements Validator{
         this.name = name;
     }
 
+    /**
+     * Валидирует правильность полей.
+     * @return true, если все верно, иначе false
+     */
     @Override
     public boolean validate() {
         return !this.name.isEmpty();

@@ -2,17 +2,28 @@ package models;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import commandLine.ConsoleColors;
-import models.forms.CoordinatesForm;
+import managers.CollectionManager;
 
 import java.util.ArrayDeque;
 import java.util.Date;
 import java.util.Objects;
 
+
+/**
+ * Функциональный интерфейс для вычисления расстояния от начала координат.
+ * @param <T> Тип первой координаты
+ * @param <S> Тип второй координаты
+ */
 @FunctionalInterface
-interface CoordinatesRange<T, E>{
-    float getDistanceFromCentre(T x, E y);
+interface CoordinatesRange<T, S>{
+    float getDistanceFromCentre(T x, S y);
 }
 
+
+/**
+ * Класс учебной группы
+ * @author azat2202
+ */
 @XStreamAlias("StudyGroup")
 public class StudyGroup implements Validator, Comparable<StudyGroup>{
     private Integer id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
@@ -39,13 +50,18 @@ public class StudyGroup implements Validator, Comparable<StudyGroup>{
         this.groupAdmin = groupAdmin;
     }
 
+    /**
+     * @return возвращает следующий id во избежание их повторения
+     */
     private static int incNextId(){
         return nextId++;
     }
 
     /**
-     * @param collection коллекция, в которой получить id.
+     * Обновляет указатель на следующий id
+     * <p>
      * Требуется, так как xStream с помощью reflection обходит приватность id
+     * @param collection коллекция, в которой получить id.
      */
 
     public static void updateId(ArrayDeque<StudyGroup> collection){
@@ -128,6 +144,10 @@ public class StudyGroup implements Validator, Comparable<StudyGroup>{
         this.groupAdmin = groupAdmin;
     }
 
+    /**
+     * Компаратор объектов основанный на сравнении расстояния от начала координат
+     * @param o объект с которым нужно сравнить объект
+     */
     @Override
     public int compareTo(StudyGroup o) {
         if (Objects.isNull(o)) return 1;
@@ -137,6 +157,10 @@ public class StudyGroup implements Validator, Comparable<StudyGroup>{
                 calc.getDistanceFromCentre(o.getCoordinates().getX(), o.getCoordinates().getY()));
     }
 
+    /**
+     * Метод валидирующие поля по условию
+     * @return true если поля валидные, false иначе
+     */
     @Override
     public boolean validate() {
         if (this.id == null || this.id <= 0) return false;
@@ -187,7 +211,7 @@ public class StudyGroup implements Validator, Comparable<StudyGroup>{
                 ConsoleColors.toColor("id = ", ConsoleColors.CYAN) + id + '\n' +
                 ConsoleColors.toColor("name = ", ConsoleColors.CYAN) + name + '\n' +
                 ConsoleColors.toColor("coordinates = ", ConsoleColors.CYAN) + coordinates + '\n' +
-                ConsoleColors.toColor("creationDate = ", ConsoleColors.CYAN) + creationDate + '\n' +
+                ConsoleColors.toColor("creationDate = ", ConsoleColors.CYAN) + CollectionManager.timeFormatter(creationDate) + '\n' +
                 ConsoleColors.toColor("studentsCount = ", ConsoleColors.CYAN) + studentsCount + '\n' +
                 ConsoleColors.toColor("expelledStudents = ", ConsoleColors.CYAN) + expelledStudents + '\n' +
                 ConsoleColors.toColor("averageMark = ", ConsoleColors.CYAN) + averageMark + '\n' +

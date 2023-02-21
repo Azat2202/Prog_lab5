@@ -11,6 +11,10 @@ import models.forms.StudyGroupForm;
 
 import java.util.Scanner;
 
+/**
+ * Команда 'update'
+ * Обновляет значение элемента коллекции, id которого равен заданному
+ */
 public class Update extends Command{
     private CollectionManager collectionManager;
     private Console console;
@@ -23,6 +27,11 @@ public class Update extends Command{
         this.console = console;
     }
 
+    /**
+     * Исполнить команду
+     * @param args аргументы команды
+     * @throws IllegalArguments неверные аргументы команды
+     */
     @Override
     public void execute(String args) throws IllegalArguments{
         if (args.isBlank()) throw new IllegalArguments();
@@ -34,7 +43,7 @@ public class Update extends Command{
             if (!collectionManager.checkExist(id)) throw new NoSuchId();
             console.println(ConsoleColors.toColor("Создание нового объекта StudyGroup", ConsoleColors.PURPLE));
             StudyGroup newStudyGroup = new StudyGroupForm(console).build();
-            collectionManager.editById(id, newStudyGroup, collectionManager.getCollection());
+            collectionManager.editById(id, newStudyGroup);
             console.println(ConsoleColors.toColor("Создание нового объекта StudyGroup окончено успешно!", ConsoleColors.PURPLE));
         } catch (NoSuchId err) {
             console.printError("В коллекции нет элемента с таким id");

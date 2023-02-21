@@ -6,6 +6,9 @@ import models.FormOfEducation;
 import java.util.Locale;
 import java.util.Scanner;
 
+/**
+ * Форма для формы обучения
+ */
 public class FormOfEducationForm extends Form<FormOfEducation>{
     private final Console console;
     private final Scanner scanner = ScannerManager.getUserScanner();
@@ -14,6 +17,10 @@ public class FormOfEducationForm extends Form<FormOfEducation>{
         this.console = console;
     }
 
+    /**
+     * Сконструировать новый элемент Enum {@link FormOfEducation}
+     * @return объект Enum {@link FormOfEducation}
+     */
     @Override
     public FormOfEducation build() {
         console.println("Возможные формы обучения: ");

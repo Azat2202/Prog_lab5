@@ -7,6 +7,10 @@ import commandLine.ConsoleColors;
 import exceptions.InvalidForm;
 import models.forms.StudyGroupForm;
 
+/**
+ * Команда 'add'
+ * Добавляет новый элемент в коллекцию
+ */
 public class AddElement extends Command{
     private CollectionManager collectionManager;
     private Console console;
@@ -17,6 +21,11 @@ public class AddElement extends Command{
         this.console = console;
     }
 
+    /**
+     * Исполнить команду
+     * @param args аргументы команды
+     * @throws IllegalArguments неверные аргументы команды
+     */
     @Override
     public void execute(String args) throws IllegalArguments {
         if (!args.isBlank()) throw new IllegalArguments();

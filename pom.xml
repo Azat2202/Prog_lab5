@@ -6,7 +6,7 @@
 
     <groupId>com.example</groupId>
     <artifactId>Prog_lab5</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0-FINAL</version>
 
     <dependencies>
         <dependency>
@@ -33,6 +33,14 @@
                             <mainClass>Main</mainClass>
                         </manifest>
                     </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9</version>
+                <configuration>
+                    <javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>
                 </configuration>
             </plugin>
         </plugins>

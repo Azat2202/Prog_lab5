@@ -3,13 +3,15 @@ package commandLine.commands;
 import commandLine.Console;
 import commandLine.ConsoleColors;
 import exceptions.IllegalArguments;
-import exceptions.InvalidForm;
-import managers.CollectionManager;
 import managers.CommandManager;
-import models.forms.StudyGroupForm;
 
 import java.util.List;
 
+
+/**
+ * Команда 'history'
+ * Выводит последние 5 команд (без их аргументов)
+ */
 public class History extends Command{
     private CommandManager commandManager;
     private Console console;
@@ -20,6 +22,11 @@ public class History extends Command{
         this.console = console;
     }
 
+    /**
+     * Исполнить команду
+     * @param args аргументы команды
+     * @throws IllegalArguments неверные аргументы команды
+     */
     @Override
     public void execute(String args) throws IllegalArguments {
         if (!args.isBlank()) throw new IllegalArguments();

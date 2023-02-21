@@ -1,5 +1,8 @@
 package commandLine;
 
+/**
+ * Класс для раскрашивания вывода в консоль
+ */
 public enum ConsoleColors {
     BLACK("\u001B[30m"),
     RED("\u001B[31m"),
@@ -17,6 +20,12 @@ public enum ConsoleColors {
         this.title = title;
     }
 
+    /**
+     * Основной метод раскрашивания текста
+     * @param s строка которую нужно покрасить
+     * @param color значение цвета
+     * @return цветная строка для вывода в консоль
+     */
     public static String toColor(String s, ConsoleColors color){
         return color + s + ConsoleColors.RESET;
     }
