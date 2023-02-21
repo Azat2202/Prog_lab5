@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"commandLine"},{"l":"commandLine.commands"},{"l":"exceptions"},{"l":"managers"},{"l":"models"},{"l":"models.forms"}];updateSearchResults();
