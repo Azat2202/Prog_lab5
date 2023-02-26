@@ -1,6 +1,7 @@
 package models.forms;
 
 import commandLine.*;
+import exceptions.ExceptionInFileMode;
 import models.Country;
 
 import java.util.Locale;
@@ -10,11 +11,16 @@ import java.util.Scanner;
  * Форма для национальности
  */
 public class NationalityForm extends Form<Country>{
-    private final Console console;
-    private final Scanner scanner = ScannerManager.getUserScanner();
+    private final Printable console;
+    private final UserInput scanner;
 
-    public NationalityForm(Console console) {
-        this.console = console;
+    public NationalityForm(Printable console) {
+        this.console = (Console.isFileMode())
+                ? new BlankConsole()
+                : console;
+        this.scanner = (Console.isFileMode())
+                ? new ExecuteFileManager()
+                : new ConsoleInput();
     }
 
     /**
@@ -32,8 +38,7 @@ public class NationalityForm extends Form<Country>{
                 return Country.valueOf(input.toUpperCase(Locale.ROOT));
             } catch (IllegalArgumentException exception){
                 console.printError("Такой страны нет в списке");
-            } catch (Throwable throwable) {
-                console.printError("Непредвиденная ошибка");
+                if (Console.isFileMode()) throw new ExceptionInFileMode();
             }
         }
     }

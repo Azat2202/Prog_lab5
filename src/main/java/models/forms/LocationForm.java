@@ -1,5 +1,6 @@
 package models.forms;
 
+import exceptions.ExceptionInFileMode;
 import exceptions.InvalidForm;
 import commandLine.*;
 import models.Location;
@@ -10,11 +11,16 @@ import java.util.Scanner;
  * Форма для локации
  */
 public class LocationForm extends Form<Location>{
-    private final Console console;
-    private final Scanner scanner = ScannerManager.getUserScanner();
+    private final Printable console;
+    private final UserInput scanner;
 
-    public LocationForm(Console console) {
-        this.console = console;
+    public LocationForm(Printable console) {
+        this.console = (Console.isFileMode())
+                ? new BlankConsole()
+                : console;
+        this.scanner = (Console.isFileMode())
+                ? new ExecuteFileManager()
+                : new ConsoleInput();
     }
 
     /**
@@ -37,8 +43,7 @@ public class LocationForm extends Form<Location>{
                 return Double.parseDouble(input);
             } catch (NumberFormatException exception) {
                 console.printError("X должно быть числом типа double");
-            } catch (Throwable throwable) {
-                console.printError("Непредвиденная ошибка!");
+                if (Console.isFileMode()) throw new ExceptionInFileMode();
             }
         }
     }
@@ -51,8 +56,7 @@ public class LocationForm extends Form<Location>{
                 return Long.parseLong(input);
             } catch (NumberFormatException exception) {
                 console.printError("Y должно быть числом типа long");
-            } catch (Throwable throwable) {
-                console.printError("Непредвиденная ошибка!");
+                if (Console.isFileMode()) throw new ExceptionInFileMode();
             }
         }
     }
@@ -63,6 +67,7 @@ public class LocationForm extends Form<Location>{
             String name = scanner.nextLine().trim();
             if (name.isBlank()){
                 console.printError("Имя не может быть пустым");
+                if (Console.isFileMode()) throw new ExceptionInFileMode();
             }
             else{
                 return name;

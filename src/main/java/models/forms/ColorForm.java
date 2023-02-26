@@ -1,6 +1,7 @@
 package models.forms;
 
 import commandLine.*;
+import exceptions.ExceptionInFileMode;
 import models.Color;
 
 import java.util.Locale;
@@ -10,13 +11,18 @@ import java.util.Scanner;
  * Форма для выбора цвета
  */
 public class ColorForm extends Form<Color>{
-    private final Console console;
-    private final Scanner scanner = ScannerManager.getUserScanner();
+    private final Printable console;
+    private final UserInput scanner;
     private final String type;
 
-    public ColorForm(Console console, String type) {
-        this.console = console;
+    public ColorForm(Printable console, String type) {
+        this.console = (Console.isFileMode())
+                ? new BlankConsole()
+                : console;
         this.type = type;
+        this.scanner = (Console.isFileMode())
+                ? new ExecuteFileManager()
+                : new ConsoleInput();
     }
     /**
      * Сконструировать новый элемент класса {@link Color}
@@ -33,8 +39,7 @@ public class ColorForm extends Form<Color>{
                 return Color.valueOf(input.toUpperCase(Locale.ROOT));
             } catch (IllegalArgumentException exception){
                 console.printError("Такого цвета нет в списке");
-            } catch (Throwable throwable) {
-                console.printError("Непредвиденная ошибка");
+                if (Console.isFileMode()) throw new ExceptionInFileMode();
             }
         }
     }

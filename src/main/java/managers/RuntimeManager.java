@@ -1,5 +1,6 @@
 package managers;
 
+import commandLine.ScannerManager;
 import exceptions.CommandRuntimeError;
 import exceptions.ExitObliged;
 import exceptions.IllegalArguments;

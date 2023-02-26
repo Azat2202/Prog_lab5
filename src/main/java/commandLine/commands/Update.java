@@ -1,15 +1,13 @@
 package commandLine.commands;
 
+import exceptions.ExceptionInFileMode;
 import exceptions.IllegalArguments;
 import managers.CollectionManager;
 import commandLine.Console;
 import commandLine.ConsoleColors;
-import commandLine.ScannerManager;
 import models.StudyGroup;
 import exceptions.InvalidForm;
 import models.forms.StudyGroupForm;
-
-import java.util.Scanner;
 
 /**
  * Команда 'update'
@@ -18,8 +16,6 @@ import java.util.Scanner;
 public class Update extends Command{
     private CollectionManager collectionManager;
     private Console console;
-
-    private final Scanner scanner = ScannerManager.getUserScanner();
 
     public Update(Console console, CollectionManager collectionManager) {
         super("update", " id {element}: обновить значение элемента коллекции, id которого равен заданному");
@@ -51,6 +47,8 @@ public class Update extends Command{
             console.printError("Поля объекта не валидны! Объект не создан!");
         } catch (NumberFormatException exception) {
             console.printError("id должно быть числом типа int");
+        } catch (ExceptionInFileMode e){
+            console.printError("Поля в файле не валидны! Объект не создан");
         }
     }
 }

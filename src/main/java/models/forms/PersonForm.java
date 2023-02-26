@@ -1,5 +1,6 @@
 package models.forms;
 
+import exceptions.ExceptionInFileMode;
 import exceptions.InvalidForm;
 import commandLine.*;
 import models.*;
@@ -11,11 +12,16 @@ import java.util.Scanner;
  */
 public class PersonForm extends Form<Person>{
 
-    private final Console console;
-    private final Scanner scanner = ScannerManager.getUserScanner();
+    private final Printable console;
+    private final UserInput scanner;
 
-    public PersonForm(Console console) {
-        this.console = console;
+    public PersonForm(Printable console) {
+        this.console = (Console.isFileMode())
+                ? new BlankConsole()
+                : console;
+        this.scanner = (Console.isFileMode())
+                ? new ExecuteFileManager()
+                : new ConsoleInput();
     }
 
     /**
@@ -44,6 +50,7 @@ public class PersonForm extends Form<Person>{
             name = scanner.nextLine().trim();
             if (name.isBlank()){
                 console.printError("Имя не может быть пустым");
+                if (Console.isFileMode()) throw new ExceptionInFileMode();
             }
             else{
                 return name;
@@ -59,8 +66,7 @@ public class PersonForm extends Form<Person>{
                 return Integer.parseInt(input);
             } catch (NumberFormatException exception) {
                 console.printError("Число студентов должно быть числом типа long");
-            } catch (Throwable throwable) {
-                console.printError("Непридвиденная ошибка!");
+                if (Console.isFileMode()) throw new ExceptionInFileMode();
             }
         }
     }

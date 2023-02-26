@@ -1,7 +1,6 @@
 package models.forms;
 
-import exceptions.InvalidForm;
-import managers.*;
+import exceptions.ExceptionInFileMode;
 import commandLine.*;
 import models.Coordinates;
 import models.FormOfEducation;
@@ -9,18 +8,22 @@ import models.Person;
 import models.StudyGroup;
 
 import java.util.Date;
-import java.util.Scanner;
 
 /**
  * Форма учебной группы
  * @author azat2202
  */
 public class StudyGroupForm extends Form<StudyGroup>{
-    private final Console console;
-    private final Scanner scanner = ScannerManager.getUserScanner();
+    private final Printable console;
+    private final UserInput scanner;
 
-    public StudyGroupForm(Console console) {
-        this.console = console;
+    public StudyGroupForm(Printable console) {
+        this.console = (Console.isFileMode())
+            ? new BlankConsole()
+            : console;
+        this.scanner = (Console.isFileMode())
+                ? new ExecuteFileManager()
+                : new ConsoleInput();
     }
 
     /**
@@ -48,6 +51,7 @@ public class StudyGroupForm extends Form<StudyGroup>{
             name = scanner.nextLine().trim();
             if (name.isBlank()){
                 console.printError("Имя не может быть пустым");
+                if (Console.isFileMode()) throw new ExceptionInFileMode();
             }
             else{
                 return name;
@@ -60,7 +64,6 @@ public class StudyGroupForm extends Form<StudyGroup>{
     }
 
     private Long askStudentsCount(){
-
         while (true) {
             console.println(ConsoleColors.toColor("Введите количество студентов", ConsoleColors.GREEN));
             String input = scanner.nextLine().trim();
@@ -68,8 +71,7 @@ public class StudyGroupForm extends Form<StudyGroup>{
                 return Long.parseLong(input);
             } catch (NumberFormatException exception) {
                 console.printError("Число студентов должно быть числом типа long");
-            } catch (Throwable throwable) {
-                console.printError("Непридвиденная ошибка!");
+                if (Console.isFileMode()) throw new ExceptionInFileMode();
             }
         }
     }
@@ -82,8 +84,7 @@ public class StudyGroupForm extends Form<StudyGroup>{
                 return Long.parseLong(input);
             } catch (NumberFormatException exception) {
                 console.printError("Число студентов должно быть числом типа long");
-            } catch (Throwable throwable) {
-                console.printError("Непридвиденная ошибка!");
+                if (Console.isFileMode()) throw new ExceptionInFileMode();
             }
         }
     }
@@ -96,8 +97,7 @@ public class StudyGroupForm extends Form<StudyGroup>{
                 return Long.parseLong(input);
             } catch (NumberFormatException exception) {
                 console.printError("Оценка должна быть числом типа long");
-            } catch (Throwable throwable) {
-                console.printError("Непридвиденная ошибка!");
+                if (Console.isFileMode()) throw new ExceptionInFileMode();
             }
         }
     }

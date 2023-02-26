@@ -4,9 +4,6 @@ import exceptions.IllegalArguments;
 import managers.CollectionManager;
 import commandLine.Console;
 import commandLine.ConsoleColors;
-import commandLine.ScannerManager;
-
-import java.util.Scanner;
 
 /**
  * Команда 'remove_by_id'
@@ -15,8 +12,6 @@ import java.util.Scanner;
 public class RemoveById extends Command {
     private CollectionManager collectionManager;
     private Console console;
-
-    private final Scanner scanner = ScannerManager.getUserScanner();
 
     public RemoveById(Console console, CollectionManager collectionManager) {
         super("remove_by_id", " id: удалить элемент из коллекции по его id");

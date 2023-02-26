@@ -2,6 +2,7 @@ package commandLine.commands;
 
 import commandLine.Console;
 import commandLine.ConsoleColors;
+import commandLine.ExecuteFileManager;
 import exceptions.CommandRuntimeError;
 import exceptions.ExitObliged;
 import exceptions.IllegalArguments;
@@ -45,12 +46,9 @@ public class Execute extends Command{
         else console.println(ConsoleColors.toColor("Путь получен успешно", ConsoleColors.PURPLE));
 
         try {
-            File file = new File(args);
-            FileInputStream fis = new FileInputStream(file);
-            BufferedInputStream bis = new BufferedInputStream(fis);
-            BufferedReader br = new BufferedReader(
-                    new InputStreamReader(bis, StandardCharsets.UTF_8));
-            for (String line = br.readLine(); line != null; line = br.readLine()) {
+            Console.setFileMode(true);
+            ExecuteFileManager.setFile(args);
+            for (String line = ExecuteFileManager.readLine(); line != null; line = ExecuteFileManager.readLine()) {
                 try{
                     commandManager.addToHistory(line);
                     String[] cmd = (line + " ").split(" ", 2);
@@ -67,9 +65,7 @@ public class Execute extends Command{
                     console.printError("Ошибка при исполнении команды");
                 }
             }
-            fis.close();
-            bis.close();
-            br.close();
+            ExecuteFileManager.close();
         }  catch (NoSuchCommand noSuchCommand){
             console.printError("Такой команды не существует");
         } catch (FileNotFoundException fileNotFoundException){
@@ -77,5 +73,6 @@ public class Execute extends Command{
         } catch (IOException e) {
             console.printError("Ошибка ввода вывода");
         }
+        Console.setFileMode(false);
     }
 }

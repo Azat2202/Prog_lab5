@@ -1,5 +1,6 @@
 package models.forms;
 
+import exceptions.ExceptionInFileMode;
 import exceptions.InvalidForm;
 import commandLine.*;
 import models.Coordinates;
@@ -10,11 +11,16 @@ import java.util.Scanner;
  * Форма для координат
  */
 public class CoordinatesForm extends Form<Coordinates>{
-    private final Console console;
-    private final Scanner scanner = ScannerManager.getUserScanner();
+    private final Printable console;
+    private final UserInput scanner;
 
-    public CoordinatesForm(Console console) {
-        this.console = console;
+    public CoordinatesForm(Printable console) {
+        this.console = (Console.isFileMode())
+                ? new BlankConsole()
+                : console;
+        this.scanner = (Console.isFileMode())
+                ? new ExecuteFileManager()
+                : new ConsoleInput();
     }
 
     /**
@@ -34,8 +40,7 @@ public class CoordinatesForm extends Form<Coordinates>{
                 return Float.parseFloat(input);
             } catch (NumberFormatException exception) {
                 console.printError("X должно быть числом типа float");
-            } catch (Throwable throwable) {
-                console.printError("Непредвиденная ошибка!");
+                if (Console.isFileMode()) throw new ExceptionInFileMode();
             }
         }
     }
@@ -47,8 +52,7 @@ public class CoordinatesForm extends Form<Coordinates>{
                 return Double.parseDouble(input);
             } catch (NumberFormatException exception) {
                 console.printError("Y должно быть числом типа double");
-            } catch (Throwable throwable){
-                console.printError("Непредвиденная ошибка!");
+                if (Console.isFileMode()) throw new ExceptionInFileMode();
             }
         }
     }

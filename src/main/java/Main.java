@@ -9,10 +9,8 @@ import java.util.List;
 /*
 ADDED = in this commit
 TODO
-    **ADDED** count_by_average_mark
-    **ADDED** count_less_than_expelled_students
-    **ADDED** javadoc
-    **WILL NOT ADD** Изменить printError чтобы он брал текст из ошибки
+FIXME
+    Object forms in files
  */
 
 public class Main {

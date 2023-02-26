@@ -2,6 +2,7 @@ package commandLine.commands;
 
 import commandLine.Console;
 import commandLine.ConsoleColors;
+import exceptions.ExceptionInFileMode;
 import exceptions.IllegalArguments;
 import managers.CollectionManager;
 import models.StudyGroup;
@@ -47,6 +48,8 @@ public class RemoveGreater extends Command{
             console.println(ConsoleColors.toColor("Удалены элементы большие чем заданный", ConsoleColors.GREEN));
         } catch (NoElements e){
             console.printError("В коллекции нет элементов");
+        } catch (ExceptionInFileMode e){
+            console.printError("Поля в файле не валидны! Объект не создан");
         }
     }
 }

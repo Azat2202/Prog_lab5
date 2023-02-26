@@ -1,6 +1,0 @@
-show
-
-
-
-execute_script C:\Users\azat2\IdeaProjects\Prog_lab5\sample_text.txt
-execute_script C:\Users\azat2\IdeaProjects\Prog_lab5\sample_text.txt
