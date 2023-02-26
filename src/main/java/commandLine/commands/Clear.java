@@ -27,6 +27,6 @@ public class Clear extends Command{
     public void execute(String args) throws IllegalArguments {
         if (!args.isBlank()) throw new IllegalArguments();
         collectionManager.clear();
-        console.print("Элементы удалены");
+        console.println("Элементы удалены");
     }
 }

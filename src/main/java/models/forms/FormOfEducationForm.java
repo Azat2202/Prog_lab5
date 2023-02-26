@@ -1,6 +1,7 @@
 package models.forms;
 
 import commandLine.*;
+import exceptions.ExceptionInFileMode;
 import models.FormOfEducation;
 
 import java.util.Locale;
@@ -10,11 +11,16 @@ import java.util.Scanner;
  * Форма для формы обучения
  */
 public class FormOfEducationForm extends Form<FormOfEducation>{
-    private final Console console;
-    private final Scanner scanner = ScannerManager.getUserScanner();
+    private final Printable console;
+    private final UserInput scanner;
 
-    public FormOfEducationForm(Console console) {
-        this.console = console;
+    public FormOfEducationForm(Printable console) {
+        this.console = (Console.isFileMode())
+                ? new BlankConsole()
+                : console;
+        this.scanner = (Console.isFileMode())
+                ? new ExecuteFileManager()
+                : new ConsoleInput();
     }
 
     /**
@@ -32,8 +38,7 @@ public class FormOfEducationForm extends Form<FormOfEducation>{
                 return FormOfEducation.valueOf(input.toUpperCase(Locale.ROOT));
             } catch (IllegalArgumentException exception){
                 console.printError("Такой формы обучения нет в списке");
-            } catch (Throwable throwable) {
-                console.printError("Непредвиденная ошибка");
+                if (Console.isFileMode()) throw new ExceptionInFileMode();
             }
         }
     }

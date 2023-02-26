@@ -1,5 +1,6 @@
 package commandLine.commands;
 
+import exceptions.ExceptionInFileMode;
 import exceptions.IllegalArguments;
 import managers.CollectionManager;
 import commandLine.Console;
@@ -35,6 +36,8 @@ public class AddElement extends Command{
             console.println(ConsoleColors.toColor("Создание объекта StudyGroup окончено успешно!", ConsoleColors.PURPLE));
         } catch (InvalidForm invalidForm) {
             console.printError("Поля объекта не валидны! Объект не создан!");
+        } catch (ExceptionInFileMode e){
+            console.printError("Поля в файле не валидны! Объект не создан");
         }
     }
 }

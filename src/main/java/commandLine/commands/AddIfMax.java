@@ -3,6 +3,7 @@ package commandLine.commands;
 import com.thoughtworks.xstream.mapper.Mapper;
 import commandLine.Console;
 import commandLine.ConsoleColors;
+import exceptions.ExceptionInFileMode;
 import exceptions.IllegalArguments;
 import exceptions.InvalidForm;
 import managers.CollectionManager;
@@ -49,6 +50,8 @@ public class AddIfMax extends Command{
             }
         } catch (InvalidForm invalidForm) {
             console.printError("Поля объекта не валидны! Объект не создан!");
+        }  catch (ExceptionInFileMode e){
+            console.printError("Поля в файле не валидны! Объект не создан");
         }
     }
 }
