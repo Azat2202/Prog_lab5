@@ -65,7 +65,7 @@ public class LocationForm extends Form<Location>{
         while (true){
             console.println(ConsoleColors.toColor("Введите название локации", ConsoleColors.GREEN));
             String name = scanner.nextLine().trim();
-            if (name.isBlank()){
+            if (name.isEmpty()){
                 console.printError("Имя не может быть пустым");
                 if (Console.isFileMode()) throw new ExceptionInFileMode();
             }
