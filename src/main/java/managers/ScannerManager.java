@@ -1,4 +1,4 @@
-package commandLine;
+package managers;
 
 import java.util.Scanner;
 

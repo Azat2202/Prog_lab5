@@ -1,6 +1,6 @@
 package commandLine;
 
-import commandLine.ScannerManager;
+import managers.ScannerManager;
 
 import java.util.Scanner;
 

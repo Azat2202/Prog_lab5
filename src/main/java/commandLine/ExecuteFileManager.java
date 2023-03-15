@@ -1,37 +1,42 @@
 package commandLine;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
+import java.net.URI;
+import java.util.ArrayDeque;
 
 /**
  * Класс для хранения файл менеджера для команды execute
  */
 public class ExecuteFileManager implements UserInput{
-    private static File file;
-    private static FileInputStream fis;
-    private static BufferedInputStream bis;
-    private static BufferedReader br;
+    private static final ArrayDeque<URI> pathQueue = new ArrayDeque<>();
+    private static final ArrayDeque<BufferedReader> fileReaders = new ArrayDeque<>();
 
-    public static void setFile(String path) throws FileNotFoundException{
-        ExecuteFileManager.file = new File(path);
-        ExecuteFileManager.fis = new FileInputStream(file);
-        ExecuteFileManager.bis = new BufferedInputStream(fis);
-        ExecuteFileManager.br = new BufferedReader(new InputStreamReader(bis, StandardCharsets.UTF_8));
-
+    public static void pushFile(String path) throws FileNotFoundException{
+        pathQueue.push(new File(path).toURI());
+        fileReaders.push(new BufferedReader(new InputStreamReader(new FileInputStream(path))));
     }
+
+    public static File getFile() {
+        return new File(pathQueue.getLast());
+    }
+
     public static String readLine() throws IOException {
-        return br.readLine();
+        return fileReaders.getFirst().readLine();
     }
-    public static void close() throws IOException {
-        fis.close();
-        bis.close();
-        br.close();
+    public static void popFile() throws IOException {
+        fileReaders.getFirst().close();
+        fileReaders.pop();
+        pathQueue.pop();
+    }
+
+    public static boolean fileRepeat(String path){
+        return pathQueue.contains(new File(path).toURI());
     }
 
     @Override
     public String nextLine() {
         try{
-            return br.readLine();
+            return readLine();
         } catch (IOException e){
             return "";
         }

@@ -9,10 +9,8 @@ import exceptions.IllegalArguments;
 import exceptions.NoSuchCommand;
 import managers.CommandManager;
 import managers.FileManager;
-import managers.RuntimeManager;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.NoSuchElementException;
 
 /**
@@ -21,8 +19,8 @@ import java.util.NoSuchElementException;
  */
 public class Execute extends Command{
     private FileManager fileManager;
-    private Console console;
-    private CommandManager commandManager;
+    private final Console console;
+    private final CommandManager commandManager;
     public Execute(Console console, FileManager fileManager, CommandManager commandManager) {
         super("execute_script", " file_name: считать и исполнить скрипт из указанного файла. В скрипте содержатся команды в таком же виде, в котором их вводит пользователь в интерактивном режиме.");
         this.fileManager = fileManager;
@@ -34,7 +32,7 @@ public class Execute extends Command{
      * Исполнить команду
      * @param args аргументы команды
      * @throws IllegalArguments неверные аргументы команды
-     * @throws CommandRuntimeError команда вызваола ошибку при исполнении
+     * @throws CommandRuntimeError команда вызвала ошибку при исполнении
      * @throws ExitObliged требуется выход из программы
      */
     @Override
@@ -47,14 +45,23 @@ public class Execute extends Command{
 
         try {
             Console.setFileMode(true);
-            ExecuteFileManager.setFile(args);
+            ExecuteFileManager.pushFile(args);
             for (String line = ExecuteFileManager.readLine(); line != null; line = ExecuteFileManager.readLine()) {
                 try{
                     commandManager.addToHistory(line);
                     String[] cmd = (line + " ").split(" ", 2);
-                    if (cmd[0].isBlank() || cmd[0].equals("execute_script")) return;
+                    if (cmd[0].isBlank()) return;
+                    if (cmd[0].equals("execute_script")){
+                        if(ExecuteFileManager.fileRepeat(cmd[1])){
+                            console.printError("Найдена рекурсия по пути " + new File(cmd[1]).getAbsolutePath());
+                            continue;
+                        }
+                    }
                     console.println(ConsoleColors.toColor("Выполнение команды " + cmd[0], ConsoleColors.YELLOW));
                     commandManager.execute(cmd[0], cmd[1]);
+                    if (cmd[0].equals("execute_script")){
+                        ExecuteFileManager.popFile();
+                    }
                 } catch (NoSuchElementException exception) {
                     console.printError("Пользовательский ввод не обнаружен!");
                 } catch (NoSuchCommand noSuchCommand) {
@@ -65,7 +72,7 @@ public class Execute extends Command{
                     console.printError("Ошибка при исполнении команды");
                 }
             }
-            ExecuteFileManager.close();
+            ExecuteFileManager.popFile();
         }  catch (NoSuchCommand noSuchCommand){
             console.printError("Такой команды не существует");
         } catch (FileNotFoundException fileNotFoundException){

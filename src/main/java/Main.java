@@ -4,13 +4,18 @@ import managers.*;
 import commandLine.Console;
 import commandLine.commands.*;
 
+import java.io.File;
 import java.util.List;
 
 /*
 ADDED = in this commit
 TODO
+    **DONE** execute_script должна работать с разными файлами
 FIXME
-    Object forms in files
+    Пробел как значение поля
+    Не вписывать айди в файле
+    **FIXED** Рекурсия
+    Разрешения у файлов
  */
 
 public class Main {
