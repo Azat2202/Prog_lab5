@@ -49,7 +49,7 @@ public class StudyGroupForm extends Form<StudyGroup>{
         while (true){
             console.println(ConsoleColors.toColor("Введите имя", ConsoleColors.GREEN));
             name = scanner.nextLine().trim();
-            if (name.isBlank()){
+            if (name.isEmpty()){
                 console.printError("Имя не может быть пустым");
                 if (Console.isFileMode()) throw new ExceptionInFileMode();
             }

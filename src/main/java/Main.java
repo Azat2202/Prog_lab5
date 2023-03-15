@@ -10,12 +10,10 @@ import java.util.List;
 /*
 ADDED = in this commit
 TODO
-    **DONE** execute_script должна работать с разными файлами
 FIXME
-    Пробел как значение поля
+    **WORKING** Пробел как значение поля
     Не вписывать айди в файле
-    **FIXED** Рекурсия
-    Разрешения у файлов
+    **TESTED** Разрешения у файлов
  */
 
 public class Main {
