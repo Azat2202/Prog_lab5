@@ -2,6 +2,7 @@ package managers;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
+import com.thoughtworks.xstream.io.StreamException;
 import com.thoughtworks.xstream.security.AnyTypePermission;
 import commandLine.Console;
 import commandLine.ConsoleColors;
@@ -67,7 +68,8 @@ public class FileManager {
             bis.close();
             if (stringBuilder.isEmpty()) {
                 console.printError("Файл пустой");
-                throw new ExitObliged();
+                this.text = "</Array>";
+                return;
             }
             this.text = stringBuilder.toString();
         } catch (FileNotFoundException fnfe) {
@@ -84,17 +86,24 @@ public class FileManager {
      * @throws ExitObliged Если объекты в файле невалидны выходим из программы
      */
     public void createObjects() throws ExitObliged{
-        XStream xstream = new XStream();
-        xstream.alias("StudyGroup", StudyGroup.class);
-        xstream.alias("Array", CollectionManager.class);
-        xstream.addPermission(AnyTypePermission.ANY);
-        xstream.addImplicitCollection(CollectionManager.class, "collection");
-        CollectionManager collectionManagerWithObjects = (CollectionManager) xstream.fromXML(this.text);
         try{
+            XStream xstream = new XStream();
+            xstream.alias("StudyGroup", StudyGroup.class);
+            xstream.alias("Array", CollectionManager.class);
+            xstream.addPermission(AnyTypePermission.ANY);
+            xstream.addImplicitCollection(CollectionManager.class, "collection");
+            CollectionManager collectionManagerWithObjects = (CollectionManager) xstream.fromXML(this.text);
+
+            for(StudyGroup s : collectionManagerWithObjects.getCollection()){
+                if (this.collectionManager.checkExist(s.getId())){
+                    console.printError("В файле повторяются айди!");
+                    throw new ExitObliged();
+                }
+                this.collectionManager.addElement(s);
+            }
             this.collectionManager.addElements(collectionManagerWithObjects.getCollection());
-        } catch (InvalidForm e) {
+        } catch (InvalidForm | StreamException e) {
             console.printError("Объекты в файле не валидны");
-            throw new ExitObliged();
         }
         StudyGroup.updateId(collectionManager.getCollection());
     }

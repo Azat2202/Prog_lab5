@@ -35,6 +35,7 @@ public class CommandManager{
     }
 
     public void addToHistory(String line){
+        if(line.isBlank()) return;
         this.commandHistory.add(line);
     }
 
