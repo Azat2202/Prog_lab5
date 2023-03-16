@@ -8,11 +8,11 @@ import java.util.ArrayDeque;
  * Класс для хранения файл менеджера для команды execute
  */
 public class ExecuteFileManager implements UserInput{
-    private static final ArrayDeque<URI> pathQueue = new ArrayDeque<>();
+    private static final ArrayDeque<String> pathQueue = new ArrayDeque<>();
     private static final ArrayDeque<BufferedReader> fileReaders = new ArrayDeque<>();
 
     public static void pushFile(String path) throws FileNotFoundException{
-        pathQueue.push(new File(path).toURI());
+        pathQueue.push(new File(path).getAbsolutePath());
         fileReaders.push(new BufferedReader(new InputStreamReader(new FileInputStream(path))));
     }
 
@@ -30,7 +30,7 @@ public class ExecuteFileManager implements UserInput{
     }
 
     public static boolean fileRepeat(String path){
-        return pathQueue.contains(new File(path).toURI());
+        return pathQueue.contains(new File(path).getAbsolutePath());
     }
 
     @Override
